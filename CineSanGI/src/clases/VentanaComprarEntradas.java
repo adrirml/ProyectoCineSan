@@ -1,7 +1,12 @@
 package clases;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,19 +18,38 @@ public class VentanaComprarEntradas extends JFrame{
 	
 	    public VentanaComprarEntradas() {
 	        setTitle("Compra de Entradas");
-	        setSize(400, 300);
+	        setSize(600, 400);
 	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 	        
 	        //layout:
-	        setLayout(new FlowLayout());
+	        setLayout(new BorderLayout());
 
-	        //componentes:
-	        JLabel labelPelis = new JLabel("Peliculas");
-	        add(labelPelis);
+	        //Titulo de peliculas:
+	        JPanel panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	        JLabel labelPelis = new JLabel("PELICULAS");
+	        labelPelis.setFont(new Font("Tahoma", Font.BOLD, 30));
+	        panelTitulo.add(labelPelis);
+	        add(panelTitulo, BorderLayout.NORTH); 
+	        
+	        //panel de botones para que salgan en columna 
+	        JPanel panelbotones = new JPanel();
+	        panelbotones.setLayout(new BoxLayout(panelbotones, BoxLayout.Y_AXIS));
+	      
+	        //Inicializar los botones 
+	        JButton pelicula1 = new JButton("Pelicula 1");
+	        JButton pelicula2 = new JButton("Pelicula 2");
+	        JButton pelicula3 = new JButton("Pelicula 3");
+	        
+	        //añadir los botones y el panel de los botones
+	        panelbotones.add(pelicula1);
+	        panelbotones.add(pelicula2);
+	        panelbotones.add(pelicula3);
+	        
+	        add(panelbotones, BorderLayout.CENTER);
+	        
+	        
 	         
 	        
-	        JComboBox comboPelis = new JComboBox<Pelicula>();
-	        add(comboPelis);
 	    }
 	
 }
