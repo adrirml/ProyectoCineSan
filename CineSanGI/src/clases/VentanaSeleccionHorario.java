@@ -20,6 +20,9 @@ public class VentanaSeleccionHorario extends JFrame {
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new GridLayout(4, 1)); //4 filas 1 columna
 		
+        
+        JLabel etiquetaHora = new JLabel("Selecciona la Hora:");
+        panelCentral.add(etiquetaHora);
 		//SLIDER DE LA HORA
 		JSlider sliderHora= new JSlider(JSlider.Horizontal, 17 ,23,30);
 		sliderHora.setMajorTickSpacing(1); //una marca por cada hora
@@ -28,19 +31,31 @@ public class VentanaSeleccionHorario extends JFrame {
 		add(new JLabel("Selecciona la Hora:"));
         panelCentral.add(sliderHora);
 		
+        
+        JLabel etiquetaDia = new JLabel("Selecciona el Día: Lunes"); // Valor inicial
+        panelCentral.add(etiquetaDia);
 		//SLIDER DEL DIA
-		String[] diasSemana = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
+        String[] diasSemana = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
         JSlider sliderDia = new JSlider(JSlider.HORIZONTAL, 1, 7, 1);
         sliderDia.setMajorTickSpacing(1);
         sliderDia.setPaintTicks(true);
+        sliderDia.setPaintLabels(true);
         
-        
-        sliderDia.addChangeListener(e -> {
-            int diaIndex = sliderDia.getValue() - 1;
-            diaSeleccionado.setText("Selecciona el Día: " + diasSemana[diaIndex]);
+        // Cambia la etiqueta de día según el slider
+        sliderDia.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int diaIndex = sliderDia.getValue() - 1;
+                etiquetaDia.setText("Seleccione el Día: " + diasSemana[diaIndex]);
+            }
         });
         
+        panelCentral.add(sliderDia);
+
+        
         add(panelCentral, BorderLayout.CENTER);
+        
+
 		
 		
 //		JButton siguiente =new JButton ("Siguiente");
