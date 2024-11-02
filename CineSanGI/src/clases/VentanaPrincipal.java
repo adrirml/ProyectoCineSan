@@ -55,12 +55,12 @@ public class VentanaPrincipal extends JFrame{
 	        
 	        
 	        //añadir imagen
-	        //NO VA LO DE LA IMAGEN A VER SI LO CONSEGUIS PONER
-//	        JLabel labelImagen = new JLabel();
-//	        URL url = VentanaPrincipal.class.getResource("images/logo.png");
-//	        ImageIcon icono = new ImageIcon(url);
-//	        labelImagen.setIcon(icono);
-//	        add(labelImagen,BorderLayout.WEST);
+	        JLabel labelImagen = new JLabel();
+	        URL url = VentanaPrincipal.class.getResource("/images/logo.png");
+	        ImageIcon icono = new ImageIcon(url);
+	        labelImagen.setIcon(icono);
+	        setLayout(new BorderLayout());
+	        add(labelImagen,BorderLayout.WEST);
 	        
 	        
 	        JLabel lblImagen = new JLabel();
