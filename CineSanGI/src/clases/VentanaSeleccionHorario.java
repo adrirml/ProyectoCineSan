@@ -1,5 +1,7 @@
 package clases;
 
-public class VentanaSeleccionHorario {
+import javax.swing.JFrame;
+
+public class VentanaSeleccionHorario extends JFrame {
 
 }

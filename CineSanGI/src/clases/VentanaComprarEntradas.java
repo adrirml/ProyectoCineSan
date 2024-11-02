@@ -47,11 +47,25 @@ public class VentanaComprarEntradas extends JFrame{
 	        
 	        add(panelbotones, BorderLayout.CENTER);
 	        
-	        //PELICULA 1:
+	        //añadir la accion de los botones de las peliculas
 	        
-	        pelicula1.addActionListener(e -> VentanaSeleccionHorario ("Pelicula 1"));
-	        pelicula2.addActionListener(e -> VentanSeleccionHorario ("Pelicula 2"));
-	        pelicula3.addActionListener(e -> VentanSeleccionHorario ("Pelicula 3"));
+	        pelicula1.addActionListener(e -> {
+
+	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario();
+	        	ventanahorario.setVisible(true);
+	        });
+	        
+	        pelicula2.addActionListener(e -> {
+	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario();
+	        	ventanahorario.setVisible(true);
+	        	
+	        });
+	        
+	        pelicula3.addActionListener(e -> {
+	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario();
+	        	ventanahorario.setVisible(true);
+	        });
+
 
 	        
 	        
