@@ -34,7 +34,7 @@ public class VentanaPrincipal extends JFrame{
 	
 	public VentanaPrincipal() {
 	        setTitle("Gestión de CineSan");
-	        setSize(1300, 600);
+	        setSize(900, 500);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setLayout(new BorderLayout());
 	        
@@ -54,8 +54,8 @@ public class VentanaPrincipal extends JFrame{
 	        Image imagenredimensionada = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 	        ImageIcon iconoredimensionado = new ImageIcon(imagenredimensionada);
 	        labelImagen.setIcon(iconoredimensionado);
-	             
-	      //añadir la imagen al panel
+	        
+	        //añadir la imagen al panel
 	        panelTitulo.add(labelImagen);
 	    
 	        //crear titulo cine:
