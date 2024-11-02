@@ -47,26 +47,21 @@ public class VentanaComprarEntradas extends JFrame{
 	        
 	        add(panelbotones, BorderLayout.CENTER);
 	        
-	        //añadir la accion de los botones de las peliculas
-	        
 	        pelicula1.addActionListener(e -> {
-
-	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario();
+	        	VentanSeleccionHorario ventanahorario =new VentanaSeleccionHorario();
 	        	ventanahorario.setVisible(true);
 	        });
 	        
 	        pelicula2.addActionListener(e -> {
-	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario();
+	        	VentanSeleccionHorario ventanahorario =new VentanaSeleccionHorario();
 	        	ventanahorario.setVisible(true);
-	        	
-	        });
+        	});
 	        
 	        pelicula3.addActionListener(e -> {
-	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario();
+	        	VentanSeleccionHorario ventanahorario =new VentanaSeleccionHorario();
 	        	ventanahorario.setVisible(true);
-	        });
-
-
+        	});
+	        
 	        
 	        
 	         
@@ -77,41 +72,39 @@ public class VentanaComprarEntradas extends JFrame{
 }
 
 
-/*
-public class VentanaSeleccionHorario extends JFrame{
 	
-	public Ventana SeleccionHorario(string tituloPelicula) {
-		setTitle("Seleccione Dia y Hora para:"+ titulopelicula);
-		setSize(400,300);
-		setLayout(new GridLayout(5,1));
-		
-		//SLIDER DE LA HORA
-		JSilder sliderHora= new JSlider(JSlider.Horizontal, 17 ,23,30);
-		sliderHora.setMajorTickSpacing(1); //una marca por cada hora
-		sliderHora.setPaintTicks(true); //para ver las marcas
-		sliderHora.setPaintLabels(true); 
-		add(new JLabel("Selecciona la Hora:"));
-		add(sliderHora);
-		
-		//SLIDER DEL DIA
-		JSlider sliderDia = new JSlider(JSlider.HORIZONTAL, 1, 7, 1); // hacer q ponga (lunes, martes miercoles..)
-		sliderDia.setMajorTickSpacing(1);
-		sliderDia.setPaintTicks(true);
-		sliderDia.setPaintLabels(true);
-		add(new JLabel("Selecciona el Día:"));
-		add(sliderDia);
-		
-		
-//		JButton siguiente =new JButton ("Siguiente");
-//		siguiente.addActionListener(e->{
-//			
-//		})
-//		add(siguiente)
-//lo siguiente seria la seleccion de butaca
-				
-		
-	}
 	
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
-*/
