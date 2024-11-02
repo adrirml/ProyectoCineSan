@@ -47,7 +47,9 @@ public class VentanaComprarEntradas extends JFrame{
 	        
 	        add(panelbotones, BorderLayout.CENTER);
 	        
-	        pelicula1.addActionListener(e -> VentanSeleccionHorario ("Pelicula 1"));
+	        //PELICULA 1:
+	        
+	        pelicula1.addActionListener(e -> VentanaSeleccionHorario ("Pelicula 1"));
 	        pelicula2.addActionListener(e -> VentanSeleccionHorario ("Pelicula 2"));
 	        pelicula3.addActionListener(e -> VentanSeleccionHorario ("Pelicula 3"));
 
@@ -60,6 +62,8 @@ public class VentanaComprarEntradas extends JFrame{
 	
 }
 
+
+/*
 public class VentanaSeleccionHorario extends JFrame{
 	
 	public Ventana SeleccionHorario(string tituloPelicula) {
@@ -94,38 +98,6 @@ public class VentanaSeleccionHorario extends JFrame{
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }
+*/

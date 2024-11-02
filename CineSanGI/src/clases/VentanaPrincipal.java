@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame{
 	
 	public VentanaPrincipal() {
 	        setTitle("Gestión de CineSan");
-	        setSize(800, 600);
+	        setSize(1300, 600);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        
 	        
@@ -43,7 +43,6 @@ public class VentanaPrincipal extends JFrame{
 	        
 	        //crear el panel donde va el titulo 
 	        panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-	        
 	        
 	        
 	        //añadir titulo cine:
@@ -61,6 +60,7 @@ public class VentanaPrincipal extends JFrame{
 	        labelImagen.setIcon(icono);
 	        setLayout(new BorderLayout());
 	        add(labelImagen,BorderLayout.WEST);
+	        
 	        
 	        
 	        JLabel lblImagen = new JLabel();
