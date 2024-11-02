@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.ImageCapabilities;
 import java.net.URL;
 
@@ -35,36 +36,42 @@ public class VentanaPrincipal extends JFrame{
 	        setTitle("Gestión de CineSan");
 	        setSize(1300, 600);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        
-	        
-	        //layout:
 	        setLayout(new BorderLayout());
 	        
 	        
-	        //crear el panel donde va el titulo 
+	        //crear el panel donde va el titulo y la imagen 
 	        panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	        
 	        
-	        //añadir titulo cine:
+	        
+	        //cargar la imagen
+	        JLabel labelImagen = new JLabel();
+	        URL url = VentanaPrincipal.class.getResource("/images/logo.png");
+	        ImageIcon icono = new ImageIcon(url);
+	        
+	        //cambiar el tamaño de la imagen 
+	        Image imagen = icono.getImage();
+	        Image imagenredimensionada = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+	        ImageIcon iconoredimensionado = new ImageIcon(imagenredimensionada);
+	        labelImagen.setIcon(iconoredimensionado);
+	             
+	      //añadir la imagen al panel
+	        panelTitulo.add(labelImagen);
+	    
+	        //crear titulo cine:
 	        JLabel labelTitulo = new JLabel("BIENVENIDO A CINESAN");
 	        labelTitulo.setFont(new Font("Tahoma", Font.BOLD, 30));
+	        
+	        //añadir el titulo al panel
 	        panelTitulo.add(labelTitulo);
+	        
+	        
+	        //añadir el panel 
 	        add(panelTitulo, BorderLayout.NORTH);
 	        
 	        
 	        
-	        //añadir imagen
-	        JLabel labelImagen = new JLabel();
-	        URL url = VentanaPrincipal.class.getResource("/images/logo.png");
-	        ImageIcon icono = new ImageIcon(url);
-	        labelImagen.setIcon(icono);
-	        setLayout(new BorderLayout());
-	        add(labelImagen,BorderLayout.WEST);
 	        
-	        
-	        
-	        JLabel lblImagen = new JLabel();
-	       
 	        //crear el panel de los botones donde van a ir los botones
 	        panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
 	        
