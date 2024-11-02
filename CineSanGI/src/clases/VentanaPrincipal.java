@@ -109,7 +109,7 @@ public class VentanaPrincipal extends JFrame{
 	        	VentanaInicioSesion ventanaInicio = new VentanaInicioSesion();
 	        	ventanaInicio.setVisible(true);
 	        	
-	        	});
+	        });
 	        
 	        //EXTRAS
 	        

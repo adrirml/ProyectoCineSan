@@ -48,30 +48,22 @@ public class VentanaComprarEntradas extends JFrame{
 	        add(panelbotones, BorderLayout.CENTER);
 	        
 	        
-	        pelicula1.addActionListener(e ->  abririVentanSeleccionHorario("Pelicula 1");
-	        pelicula2.addActionListener(e ->  abririVentanSeleccionHorario("Pelicula 2");
-	        pelicula3.addActionListener(e ->  abririVentanSeleccionHorario("Pelicula 3");
-
-	        private void abrirVentanaSeleccionHorario(String tituloPelicula) {
-	        	VentanaSeleccionHorario ventanaHorario = new VentanaSeleccionHorario(tituloPelicula);
-	            ventanaHorario.setVisible(true);
-	        }
+	  
 	        
+	        pelicula1.addActionListener(e -> {
+	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.get(titulo));
+	        	ventanahorario.setVisible(true);
+	        });
 	        
-//	        pelicula1.addActionListener(e -> {
-//	        	VentanSeleccionHorario ventanahorario =new VentanaSeleccionHorario();
-//	        	ventanahorario.setVisible(true);
-//	        });
-//	        
-//	        pelicula2.addActionListener(e -> {
-//	        	VentanSeleccionHorario ventanahorario =new VentanaSeleccionHorario();
-//	        	ventanahorario.setVisible(true);
-//        	});
-//	        
-//	        pelicula3.addActionListener(e -> {
-//	        	VentanSeleccionHorario ventanahorario =new VentanaSeleccionHorario();
-//	        	ventanahorario.setVisible(true);
-//        	});
+	        pelicula2.addActionListener(e -> {
+	        	VentanaSeleccionHorario ventanahorario =new VentanaSeleccionHorario(pelicula.get(titulo));
+	        	ventanahorario.setVisible(true);
+        	});
+	        
+	        pelicula3.addActionListener(e -> {
+	        	VentanaSeleccionHorario ventanahorario =new VentanaSeleccionHorario(pelicula.get(titulo));
+	        	ventanahorario.setVisible(true);
+        	});
 	        
 	        
 	        
