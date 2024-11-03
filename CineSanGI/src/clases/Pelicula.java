@@ -6,6 +6,7 @@ public class Pelicula {
 	private String director;
 	private int anyoEstreno;
 	private int edadRecomendada;
+	private String logoPath;
 	public String getTitulo() {
 		return titulo;
 	}
@@ -30,17 +31,27 @@ public class Pelicula {
 	public void setEdadRecomendada(int edadRecomendada) {
 		this.edadRecomendada = edadRecomendada;
 	}
-	public Pelicula(String titulo, String director, int anyoEstreno, int edadRecomendada) {
+	public String getLogoPath( ) {
+		return logoPath;
+	}
+	
+	public void setLogoPath( String logoPath) {
+		this.logoPath = logoPath;
+	}
+	
+	public String getDescription() {
+		return String.format("%s (%d)\nDirigida por: %s\nEdad Recomendada: %d+",
+                titulo, anyoEstreno, director, edadRecomendada);
+	}
+	public Pelicula(String titulo, String director, int anyoEstreno, int edadRecomendada,String logoPath) {
 		super();
 		this.titulo = titulo;
 		this.director = director;
 		this.anyoEstreno = anyoEstreno;
 		this.edadRecomendada = edadRecomendada;
+		this.logoPath = logoPath;
 	}
-	public Pelicula() {
-		super();
-	}
-	
+
 	
 
 }
