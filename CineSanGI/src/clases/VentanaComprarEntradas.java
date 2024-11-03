@@ -56,7 +56,7 @@ public class VentanaComprarEntradas extends JFrame{
 	}
 	private void inicializarPeliculas() {
 	    peliculas = new ArrayList<>();
-	    peliculas.add(new Pelicula("El Viaje Imposible", "Sofia Mendoza", 2022, 12, "/images/el_viaje_imposible.png"));
+	    peliculas.add(new Pelicula("Misión imposible 3", "J. J. Abrams", 2006, 12, "/images/mision.png"));
 	    peliculas.add(new Pelicula("Sombras de la Ciudad", "Carlos Duarte", 2021, 16, "/images/sombras_de_la_ciudad.png"));
 	    peliculas.add(new Pelicula("Horizonte de Fuego", "Ana Torres", 2020, 18, "/images/horizonte_de_fuego.png"));
 	    peliculas.add(new Pelicula("Ecos del Pasado", "Miguel Vargas", 2019, 13, "/images/ecos_del_pasado.png"));
