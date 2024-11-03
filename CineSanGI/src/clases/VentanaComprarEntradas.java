@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.*;
 import java.util.ArrayList;
-
+import java.awt.Image;
+import java.net.URL;
 
 public class VentanaComprarEntradas extends JFrame{
 
@@ -56,16 +57,16 @@ public class VentanaComprarEntradas extends JFrame{
 	}
 	private void inicializarPeliculas() {
 	    peliculas = new ArrayList<>();
-	    peliculas.add(new Pelicula("Misión imposible 3", "J. J. Abrams", 2006, 12, "/images/mision.png"));
-	    peliculas.add(new Pelicula("Sombras de la Ciudad", "Carlos Duarte", 2021, 16, "/images/sombras_de_la_ciudad.png"));
-	    peliculas.add(new Pelicula("Horizonte de Fuego", "Ana Torres", 2020, 18, "/images/horizonte_de_fuego.png"));
-	    peliculas.add(new Pelicula("Ecos del Pasado", "Miguel Vargas", 2019, 13, "/images/ecos_del_pasado.png"));
-	    peliculas.add(new Pelicula("Luz en la Oscuridad", "Laura Moreno", 2023, 15, "/images/luz_en_la_oscuridad.png"));
-	    peliculas.add(new Pelicula("Misión al Desierto", "Daniel Suarez", 2022, 16, "/images/mision_al_desierto.png"));
-	    peliculas.add(new Pelicula("La Última Frontera", "Isabel Ramírez", 2021, 18, "/images/la_ultima_frontera.png"));
-	    peliculas.add(new Pelicula("Noche Eterna", "Jorge Beltrán", 2020, 12, "/images/noche_eterna.png"));
-	    peliculas.add(new Pelicula("Tiempo de Cambios", "Carmen Ortega", 2023, 14, "/images/tiepocambios.png"));
-	    peliculas.add(new Pelicula("Destino Perdido", "Ricardo Pérez", 2022, 17, "/images/destino_perdido.png"));
+	    peliculas.add(new Pelicula("Misión: Imposible 3", "J. J. Abrams", 2006, 12, "/images/mision.png"));
+	    peliculas.add(new Pelicula("Inception", "Christopher Nolan", 2010, 13, "/images/inception.png"));
+	    peliculas.add(new Pelicula("Parasite", "Bong Joon-ho", 2019, 16, "/images/parasite.png"));
+	    peliculas.add(new Pelicula("Joker", "Todd Phillips", 2019, 18, "/images/joker.png"));
+	    peliculas.add(new Pelicula("The Social Network", "David Fincher", 2010, 12, "/images/tsnetwork.png"));
+	    peliculas.add(new Pelicula("Interstellar", "Christopher Nolan", 2014, 12, "/images/interstellar.png"));
+	    peliculas.add(new Pelicula("The Grand Budapest Hotel", "Wes Anderson", 2014, 14, "/images/TheBudapestHotel.png"));
+	    peliculas.add(new Pelicula("Whiplash", "Damien Chazelle", 2014, 15, "/images/whiplash.png"));
+	    peliculas.add(new Pelicula("La La Land", "Damien Chazelle", 2016, 13, "/images/land.png"));
+	    peliculas.add(new Pelicula("Mad Max: Fury Road", "George Miller", 2015, 16, "/images/max.png"));
 	}
 
 	private JPanel crearPanelPelicula(Pelicula pelicula) {
@@ -74,17 +75,22 @@ public class VentanaComprarEntradas extends JFrame{
 		panelPelicula.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 	    
 		
-		//Logo
 		JLabel labelLogo = new JLabel();
-		labelLogo.setIcon(new ImageIcon(pelicula.getLogoPath()));
+		URL url =  VentanaPrincipal.class.getResource(pelicula.getLogoPath());
+		if (url != null) {
+			ImageIcon icono = new ImageIcon(url);
+			Image imagen = icono.getImage();
+			Image imagenDimension = imagen.getScaledInstance(150,200, Image.SCALE_SMOOTH);
+			ImageIcon iconoDimension = new ImageIcon(imagenDimension);
+			labelLogo.setIcon(iconoDimension);
+		}
 		panelPelicula.add(labelLogo, BorderLayout.WEST);
-		
-		//Informacion
 		
 		JPanel panelInfo = new JPanel();
 		panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.Y_AXIS));
 		
 		JLabel labelTitulo = new JLabel(pelicula.getTitulo());
+		labelTitulo.setFont(new Font(labelTitulo.getFont().getName(), Font.BOLD, 18));
 		panelInfo.add(labelTitulo);
 		
 		JLabel labelDescripcion = new JLabel(pelicula.getDescription());

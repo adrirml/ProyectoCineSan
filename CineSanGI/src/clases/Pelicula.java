@@ -40,7 +40,7 @@ public class Pelicula {
 	}
 	
 	public String getDescription() {
-		return String.format("%s (%d)\nDirigida por: %s\nEdad Recomendada: %d+",
+		return String.format("<html> %s (%d) <br>Dirigida por: %s<br>Edad Recomendada: %d+ <html>",
                 titulo, anyoEstreno, director, edadRecomendada);
 	}
 	public Pelicula(String titulo, String director, int anyoEstreno, int edadRecomendada,String logoPath) {
