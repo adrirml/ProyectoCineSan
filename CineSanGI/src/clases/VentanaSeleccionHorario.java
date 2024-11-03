@@ -73,7 +73,7 @@ public class VentanaSeleccionHorario extends JFrame {
         	int horaSeleccionada = sliderHora.getValue();
         	int diaSeleccionado = sliderDia.getValue();
         	String diaSeleccionadoT = diasSemana[diaSeleccionado -1];
-        	JOptionPane.showInternalMessageDialog(this, "Has seleccionado: " + diaSeleccionadoT + "a las " + horaSeleccionada + ":00");
+        	JOptionPane.showMessageDialog(this, "Has seleccionado: " + diaSeleccionadoT + " a las " + horaSeleccionada + ":00");
         });
         add(siguiente, BorderLayout.SOUTH);
 		
