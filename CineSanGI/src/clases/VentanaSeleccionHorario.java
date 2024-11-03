@@ -4,15 +4,20 @@ import java.awt.*;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class VentanaSeleccionHorario extends JFrame {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public VentanaSeleccionHorario(String tituloPelicula) {
 		setTitle("Compra de Entradas");
 		setSize(600,400);
@@ -33,11 +38,10 @@ public class VentanaSeleccionHorario extends JFrame {
         JLabel etiquetaHora = new JLabel("Selecciona la Hora:");
         panelCentral.add(etiquetaHora);
 		//SLIDER DE LA HORA
-		JSlider sliderHora= new JSlider(JSlider.HORIZONTAL, 17 ,23,30);
+		JSlider sliderHora= new JSlider(JSlider.HORIZONTAL, 17 ,23,17);
 		sliderHora.setMajorTickSpacing(1); //una marca por cada hora
 		sliderHora.setPaintTicks(true); //para ver las marcas
 		sliderHora.setPaintLabels(true); 
-		add(new JLabel("Selecciona la Hora:"));
         panelCentral.add(sliderHora);
 		
         
@@ -50,7 +54,7 @@ public class VentanaSeleccionHorario extends JFrame {
         sliderDia.setPaintTicks(true);
         sliderDia.setPaintLabels(true);
         
-        // Cambia la etiqueta de día según el slider
+     
         sliderDia.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -64,16 +68,15 @@ public class VentanaSeleccionHorario extends JFrame {
         
         add(panelCentral, BorderLayout.CENTER);
         
-
-		
-		
-//		JButton siguiente =new JButton ("Siguiente");
-//		siguiente.addActionListener(e->{
-//			
-//		})
-//		add(siguiente)
-//lo siguiente seria la seleccion de butaca
-				
+        JButton siguiente = new JButton("Siguiente");
+        siguiente.addActionListener(e -> {
+        	int horaSeleccionada = sliderHora.getValue();
+        	int diaSeleccionado = sliderDia.getValue();
+        	String diaSeleccionadoT = diasSemana[diaSeleccionado -1];
+        	JOptionPane.showInternalMessageDialog(this, "Has seleccionado: " + diaSeleccionadoT + "a las " + horaSeleccionada + ":00");
+        });
+        add(siguiente, BorderLayout.SOUTH);
 		
 	}
-}
+}	
+
