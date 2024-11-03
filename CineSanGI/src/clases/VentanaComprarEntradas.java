@@ -51,17 +51,17 @@ public class VentanaComprarEntradas extends JFrame{
 	  
 	        
 	        pelicula1.addActionListener(e -> {
-	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.get(titulo));
+	        	VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(Pelicula.get(titulo));
 	        	ventanahorario.setVisible(true);
 	        });
 	        
 	        pelicula2.addActionListener(e -> {
-	        	VentanaSeleccionHorario ventanahorario =new VentanaSeleccionHorario(pelicula.get(titulo));
+	        	VentanaSeleccionHorario ventanahorario =new VentanaSeleccionHorario(Pelicula.get(titulo));
 	        	ventanahorario.setVisible(true);
         	});
 	        
 	        pelicula3.addActionListener(e -> {
-	        	VentanaSeleccionHorario ventanahorario =new VentanaSeleccionHorario(pelicula.get(titulo));
+	        	VentanaSeleccionHorario ventanahorario =new VentanaSeleccionHorario(Pelicula.get(titulo));
 	        	ventanahorario.setVisible(true);
         	});
 	        

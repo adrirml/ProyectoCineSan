@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -40,7 +41,7 @@ public class VentanaInicioSesion extends JFrame {
         JTextField correoClte = new JTextField(20);
         
         JLabel lblContraClte = new JLabel("Contraseña: ");
-        JTextField contrasenyaClte = new JTextField(15);
+        JPasswordField contrasenyaClte = new JPasswordField(15);
         
         panelBotones.add(lblNombreClte);
         panelBotones.add(nombreClte);

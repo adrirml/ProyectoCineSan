@@ -1,6 +1,15 @@
 package clases;
 
+import java.awt.*;
+import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class VentanaSeleccionHorario extends JFrame {
 	
@@ -12,7 +21,7 @@ public class VentanaSeleccionHorario extends JFrame {
 
 		
 		JPanel panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel labelDiaHora = new JLabel("Seleccione Dia y Hora para:"+ titulopelicula);
+        JLabel labelDiaHora = new JLabel("Seleccione Dia y Hora para:"+ tituloPelicula);
         labelDiaHora.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTitulo.add(labelDiaHora);
         add(panelTitulo, BorderLayout.NORTH);
@@ -24,7 +33,7 @@ public class VentanaSeleccionHorario extends JFrame {
         JLabel etiquetaHora = new JLabel("Selecciona la Hora:");
         panelCentral.add(etiquetaHora);
 		//SLIDER DE LA HORA
-		JSlider sliderHora= new JSlider(JSlider.Horizontal, 17 ,23,30);
+		JSlider sliderHora= new JSlider(JSlider.HORIZONTAL, 17 ,23,30);
 		sliderHora.setMajorTickSpacing(1); //una marca por cada hora
 		sliderHora.setPaintTicks(true); //para ver las marcas
 		sliderHora.setPaintLabels(true); 
