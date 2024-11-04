@@ -2,88 +2,103 @@ package clases;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class VentanaSeleccionarHorario2 extends JFrame {
     private static final long serialVersionUID = 1L;
-    private JSlider sliderHora;
     private JLabel etiquetaHora;
     private int diaSeleccionado;
-    public VentanaSeleccionarHorario2(HorarioPelícula horarioPelicula) {
-        Pelicula pelicula = horarioPelicula.getPelicula();
-        Map<Integer, List<Integer>> horariosPorDia = horarioPelicula.getHorariosPorDia();
+    private Map<Integer, List<Integer>> horariosPorDia;
+    private JButton salir;
+    
+    public VentanaSeleccionarHorario2() {
+        generarHorariosAleatorios();
+        
         JPanel panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel panelDias = new JPanel(new GridLayout(5, 7, 5, 5)); //Cuadrícula de 5 filas x 7 columnas para 30 días
         JPanel panelCentral = new JPanel(new BorderLayout());
-        JLabel labelDiaHora = new JLabel("Seleccione Día y Hora para: " + pelicula.getTitulo());
-        etiquetaHora = new JLabel("Selecciona la Hora:");
-        etiquetaHora = new JLabel("Selecciona la Hora:");
+        JLabel labelDiaHora = new JLabel("Seleccione Día y Hora para: ");
+        etiquetaHora = new JLabel("Seleccione el Día:");
         JButton siguiente = new JButton("Siguiente");
-        
-        setTitle("Compra de Entradas - " + pelicula.getTitulo());
+        salir = new JButton("Salir");
+        JPanel panelSur = new JPanel();
+        setTitle("Compra de Entradas");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         panelTitulo.add(labelDiaHora);
         add(panelTitulo, BorderLayout.NORTH);
-        // Configuración del slider de hora
-        sliderHora = new JSlider(JSlider.HORIZONTAL, 17, 23, 17); 
-        sliderHora.setMajorTickSpacing(1);
-        sliderHora.setPaintTicks(true);
-        sliderHora.setPaintLabels(true);
-        sliderHora.setEnabled(false);
-        //tabla de días
-
-        for (int dia = 1; dia <= 30; dia++) {
-            JButton botonDia = new JButton(String.valueOf(dia));
-            final int diaActual =dia;
-            if (horariosPorDia.containsKey(dia)){
-                botonDia.setEnabled(true);
-                botonDia.setBackground(Color.GREEN);
-                botonDia.addActionListener(e -> {
-                    diaSeleccionado = diaActual; 
-                    actualizarHorasDisponibles(horarioPelicula,diaActual);
-                });
-            }else {
-                botonDia.setEnabled(false);
-            }
-            panelDias.add(botonDia);
-        }
-        //panel de días y slider de horas
-        panelCentral.add(panelDias,BorderLayout.CENTER);
-        panelCentral.add(etiquetaHora,BorderLayout.NORTH);
-        panelCentral.add(sliderHora,BorderLayout.SOUTH);
-
-        add(panelCentral, BorderLayout.CENTER);
-
-        // Botón de "Siguiente"
-        siguiente.addActionListener(e -> JOptionPane.showMessageDialog(this,"Has seleccionado el día:" + diaSeleccionado + " a las " + sliderHora.getValue()  + ":00"));
-        add(siguiente, BorderLayout.SOUTH);
-    }
-
-    private void actualizarHorasDisponibles(HorarioPelícula horarioPelicula,int diaSeleccionado) {
-        List<Integer> horasDisponibles = horarioPelicula.getHorariosPorDia(diaSeleccionado);
-        if (horasDisponibles.isEmpty()) {
-            JOptionPane.showMessageDialog(this,"No hay horarios disponibles para este día.");
-            sliderHora.setEnabled(false); 
-            return;
-        }
-        int minHora = horasDisponibles.get(0);
-        int maxHora = horasDisponibles.get(0);
         
-        //mínimo y máximo de la lista
-        for (int hora : horasDisponibles) {
-            if (hora < minHora) {
-                minHora = hora;
-            }
-            if (hora > maxHora) {
-                maxHora = hora;
-            }
+        for (int dia=1; dia <= 30; dia++) {
+        	JButton botonDia = new JButton(String.valueOf(dia));
+        	final int diaActual = dia;
+        	
+        	if (horariosPorDia.containsKey(dia)) {
+        		botonDia.setEnabled(true);
+        		botonDia.setBackground(Color.GREEN);
+        		botonDia.addActionListener(e -> {
+        			diaSeleccionado = diaActual;
+        			mostrarHorasDisponibles(diaActual);
+        		});
+        	}else {
+        		botonDia.setEnabled(true);
+        	}
+        	panelDias.add(botonDia);
         }
-        sliderHora.setMinimum(minHora);
-        sliderHora.setMaximum(maxHora);
-        sliderHora.setEnabled(true);
-        etiquetaHora.setText("Horas disponibles para el día " + diaSeleccionado + ":");
+        
+        panelCentral.add(panelDias, BorderLayout.CENTER);
+        panelCentral.add(etiquetaHora, BorderLayout.SOUTH);
+        add(panelCentral, BorderLayout.CENTER);
+        
+        panelSur.add(siguiente);
+        siguiente.addActionListener(e -> {
+        	JOptionPane.showMessageDialog(this, "Gracias por seleccionar el día");
+        });
+        panelSur.add(salir);
+        salir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+        });
+        add(panelSur,BorderLayout.SOUTH);
+    }
+    
+    private void mostrarHorasDisponibles(int diaSleccionado) {
+    	List<Integer> horasDisponibles = horariosPorDia.getOrDefault(diaSeleccionado, Collections.emptyList());
+    	if (horasDisponibles.isEmpty()) {
+    		etiquetaHora.setText("No hay horas Disponibles");
+    		return;
+    	}
+    	String horasTexto= horasDisponibles.toString();
+    	etiquetaHora.setText(horasTexto);
+    }
+    
+    private void generarHorariosAleatorios(){
+    	horariosPorDia = new HashMap<>();
+    	Random random = new Random();
+    	
+    	int totalDias = 30;
+    	int diasDisponibles =10;
+    	int horaMin = 17;
+    	int horaMax = 23;
+    	
+    	Set<Integer> diasAleatorios = new HashSet<>();
+    	while (diasAleatorios.size() < diasDisponibles) {
+    		int diaAleatorio = random.nextInt(totalDias) +1;
+    		diasAleatorios.add(diaAleatorio);
+    	}
+    	for (int dia : diasAleatorios) {
+    		int cantidadHoras = random.nextInt(4) +2;
+    		Set<Integer> horasDia = new HashSet<>();
+    		while (horasDia.size() < cantidadHoras) {
+    			int horaAleatoria = random.nextInt(horaMax -horaMin +1) + horaMin;
+    			horasDia.add(horaAleatoria);
+    		}
+    		horariosPorDia.put(dia,new ArrayList<>(horasDia));
+    	}
     }
 }
