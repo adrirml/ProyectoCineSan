@@ -3,21 +3,13 @@ package clases;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.ImageCapabilities;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTable;
-
-
 
 public class VentanaPrincipal extends JFrame{
 	
@@ -37,13 +29,10 @@ public class VentanaPrincipal extends JFrame{
 	        setSize(900, 500);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setLayout(new BorderLayout());
-	        
-	        
+	                
 	        //crear el panel donde va el titulo y la imagen 
 	        panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-	        
-	        
-	        
+	               	        
 	        //cargar la imagen
 	        JLabel labelImagen = new JLabel();
 	        URL url = VentanaPrincipal.class.getResource("/images/logo.png");
@@ -69,9 +58,6 @@ public class VentanaPrincipal extends JFrame{
 	        //añadir el panel 
 	        add(panelTitulo, BorderLayout.NORTH);
 	        
-	        
-	        
-	        
 	        //crear el panel de los botones donde van a ir los botones
 	        panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
 	        
@@ -91,16 +77,13 @@ public class VentanaPrincipal extends JFrame{
 	        panelBotones.add(botonIniciarSesion);
 	        panelBotones.add(botonExtras);
 	        add(panelBotones, BorderLayout.CENTER);
-	        
-	 
-	        
+	      	        
 	        //COMPRAR ENTRADAS:
 	        botonEntradas.addActionListener(e ->{
 	        	
 	        	 VentanaComprarEntradas ventanaCompra = new VentanaComprarEntradas();
 		         ventanaCompra.setVisible(true);
-	        	
-	     
+	        		     
 	        });
 	        
 	        //INICIAR SESION

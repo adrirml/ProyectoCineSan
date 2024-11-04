@@ -7,6 +7,7 @@ public class Pelicula {
 	private int anyoEstreno;
 	private int edadRecomendada;
 	private String logoPath;
+	
 	public String getTitulo() {
 		return titulo;
 	}

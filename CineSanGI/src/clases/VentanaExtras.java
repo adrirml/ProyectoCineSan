@@ -5,9 +5,10 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 public class VentanaExtras extends JFrame {
-	
-}
-	public VentanaInicioSesion() {
+
+	private static final long serialVersionUID = 1L;
+
+	public VentanaExtras() {
 		setTitle("Comprar Extras");
 		setSize(800,600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
@@ -17,4 +18,5 @@ public class VentanaExtras extends JFrame {
         
         
 
+}
 }
