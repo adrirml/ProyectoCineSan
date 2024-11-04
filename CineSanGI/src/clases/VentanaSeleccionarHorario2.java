@@ -10,6 +10,8 @@ public class VentanaSeleccionarHorario2 extends JFrame {
     private JSlider sliderHora;
     private JLabel etiquetaHora;
     private int diaSeleccionado;
+   
+    
     public VentanaSeleccionarHorario2(HorarioPelícula horarioPelicula) {
         Pelicula pelicula = horarioPelicula.getPelicula();
         Map<Integer, List<Integer>> horariosPorDia = horarioPelicula.getHorariosPorDia();
@@ -57,9 +59,14 @@ public class VentanaSeleccionarHorario2 extends JFrame {
 
         add(panelCentral, BorderLayout.CENTER);
 
+
+        
         // Botón de "Siguiente"
         siguiente.addActionListener(e -> JOptionPane.showMessageDialog(this,"Has seleccionado el día:" + diaSeleccionado + " a las " + sliderHora.getValue()  + ":00"));
+        
+       
         add(siguiente, BorderLayout.SOUTH);
+        
     }
 
     private void actualizarHorasDisponibles(HorarioPelícula horarioPelicula,int diaSeleccionado) {

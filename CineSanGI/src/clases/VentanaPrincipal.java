@@ -83,6 +83,7 @@ public class VentanaPrincipal extends JFrame{
 	        	
 	        	 VentanaComprarEntradas ventanaCompra = new VentanaComprarEntradas();
 		         ventanaCompra.setVisible(true);
+		         this.dispose(); //cerramos la ventana y pasamos a la siguiente
 	        		     
 	        });
 	        
@@ -91,7 +92,8 @@ public class VentanaPrincipal extends JFrame{
 	        	
 	        	VentanaInicioSesion ventanaInicio = new VentanaInicioSesion();
 	        	ventanaInicio.setVisible(true);
-	        	
+		         this.dispose(); //cerramos la ventana y pasamos a la siguiente
+
 	        });
 	        
 	        //EXTRAS
@@ -100,6 +102,8 @@ public class VentanaPrincipal extends JFrame{
 	        	
 	        	VentanaExtras ventanaExtras = new VentanaExtras();
 	        	ventanaExtras.setVisible(true);
+		         this.dispose(); //cerramos la ventana y pasamos a la siguiente
+
 	        });
 	        
 	        

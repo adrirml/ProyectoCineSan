@@ -17,6 +17,7 @@ public class VentanaComprarEntradas extends JFrame{
 	private ArrayList<Pelicula> peliculas;
 	public JButton salir;
 	public JPanel panelSur;
+	public JButton volveratras; 
 	
 	public VentanaComprarEntradas() {
 
@@ -29,7 +30,24 @@ public class VentanaComprarEntradas extends JFrame{
 	    JLabel labelPelis = new JLabel("PELICULAS");
 	  	JPanel panelbotones = new JPanel(); 
 	  	
+	  	//Inicializar el boton de salir 
 	    JButton salir = new JButton("Salir");
+	    
+
+		//Inicializar el boton de volver atras y añadirlo al panel sur 
+		volveratras = new JButton("Anterior");
+		panelSur.add(volveratras); 
+		
+		//Action listener del boton de volver a la pagina anterior 
+		volveratras.addActionListener(e -> {
+			VentanaPrincipal ventanaprincipal = new VentanaPrincipal();
+			ventanaprincipal.setVisible(true);
+			this.dispose(); //se cierra esta ventana
+		});
+		
+		//Accion de cerrar la ventana al volver atras 
+		
+		
 	  	//Confi Layout
 		setTitle("Compra de Entradas");
 	    setSize(600, 700);
@@ -47,7 +65,8 @@ public class VentanaComprarEntradas extends JFrame{
 	    JScrollPane scrollPanel = new JScrollPane(panelbotones);
 	    add(scrollPanel,BorderLayout.CENTER);
 	    //Acción Salir
-	    panelSur.add(salir);		
+	    panelSur.add(salir);	
+	    
 		salir.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -57,6 +76,8 @@ public class VentanaComprarEntradas extends JFrame{
 		
 		//Posición
 		this.getContentPane().add(panelSur,"South");
+		
+		
 	}
 	//Array de Películas
 	private void inicializarPeliculas() {
