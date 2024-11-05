@@ -25,13 +25,10 @@ public class VentanaComprarEntradas extends JFrame{
 	    JPanel panelSur = new JPanel();
 	    JPanel panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	    JLabel labelPelis = new JLabel("PELICULAS");
-<<<<<<< HEAD
+
 	  	JPanel panelbotones = new JPanel(); 
 	  	
 	  	//Inicializar el boton de salir 
-=======
-	  	JPanel panelbotones = new JPanel();
->>>>>>> branch 'master' of https://github.com/adrirml/ProyectoCineSan.git
 	    JButton salir = new JButton("Salir");
 	    
 
@@ -121,8 +118,6 @@ public class VentanaComprarEntradas extends JFrame{
 		//Descripción
 		JLabel labelDescripcion = new JLabel(pelicula.getDescription());
         //Mostrar la ventana de selección de horario
-        JButton botonSeleccionar = new JButton("Seleccionar");
-		   
         JButton botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(e -> {
 			VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.getTitulo());
