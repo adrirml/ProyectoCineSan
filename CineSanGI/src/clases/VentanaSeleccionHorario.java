@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -111,12 +112,34 @@ public class VentanaSeleccionHorario extends JFrame {
         add(confirmarButton, BorderLayout.SOUTH);
         
         
-      //panel de los asientos 
+      //panel de la sala para meter el esquema de los asientos 
 		
-        	
+        	JPanel salacine = new JPanel();
+      		salacine.setLayout(new BorderLayout(10,10));
+
+      		// panel donde se va indicar donde esta la pantalla
+      		
+      		JPanel pantallaPanel = new JPanel();
+      		pantallaPanel.setLayout(new BorderLayout());
+      		pantallaPanel.setBackground(Color.BLACK);
+      		
+      		JTextField pantalla = new JTextField("PANTALLA");
+            pantalla.setEditable(false);    
+            pantalla.setHorizontalAlignment(JTextField.CENTER);
+            pantalla.setFont(new Font("Arial", Font.PLAIN, 24)); // Formato de la fuente
+            pantalla.setForeground(Color.WHITE);
+      		pantalla.setBackground(Color.GRAY);
+      		
+      		//Añadimos la pantalla al panel de la salacine
+      		pantallaPanel.add(pantalla, BorderLayout.CENTER);
+      		
+      		salacine.add(pantallaPanel, BorderLayout.NORTH);
+      		
+      		//creamos el panel donde vamos a colocar los asientos
       		JPanel panelAsientos = new JPanel();
       		panelAsientos.setBackground(Color.DARK_GRAY);
-      		panelAsientos.setLayout(new GridLayout(5,10));
+      		panelAsientos.setLayout(new GridLayout(11,10));
+      		
       		
       		
       		ArrayList<Integer> nums = new ArrayList<>();
@@ -133,20 +156,23 @@ public class VentanaSeleccionHorario extends JFrame {
       			
       			
       			boton.addActionListener(e -> {
-      				if(boton.isSelected()) {
-      					boton.setBackground(Color.BLUE);
+      				if(boton.getBackground() == Color.GREEN) {        //clickar para ocupar asiento
+      					boton.setBackground(Color.RED);
+      				}else {
+      					boton.setBackground(Color.GREEN);				// si lo vuelves a clickar se queda libre
       				}
       				
-      				//falta q cuando este ocupado se ponga en rojo 
       				
       			});
       			
       			panelAsientos.add(boton);
       			
       		}
-      		//Añadir en panel de asientos a la ventana 
+      		//Añadir en panel de asientos al panel salacine y luego añadir este a la ventana 
       		
-     		 getContentPane().add(panelAsientos, BorderLayout.CENTER);
+      		 salacine.add(panelAsientos, BorderLayout.CENTER);
+      		
+     		 getContentPane().add(salacine, BorderLayout.CENTER);
       		 
       		 
     }
