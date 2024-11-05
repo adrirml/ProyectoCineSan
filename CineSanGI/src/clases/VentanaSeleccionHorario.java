@@ -53,7 +53,6 @@ public class VentanaSeleccionHorario extends JFrame {
         sliderDia.setPaintTicks(true);
         sliderDia.setPaintLabels(true);
         
-     
         sliderDia.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
