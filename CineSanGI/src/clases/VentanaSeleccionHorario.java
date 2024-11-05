@@ -1,8 +1,7 @@
 package clases;
 
 import java.awt.*;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -104,12 +103,52 @@ public class VentanaSeleccionHorario extends JFrame {
 
         panelSeleccion.add(panelHorarios); 
         
-        add(panelSeleccion, BorderLayout.CENTER);
+        add(panelSeleccion, BorderLayout.NORTH);
 
         // BOTÓN DE CONFIRMAR
         JButton confirmarButton = new JButton("Confirmar");
         confirmarButton.addActionListener(e -> mostrarSeleccion());
         add(confirmarButton, BorderLayout.SOUTH);
+        
+        
+      //panel de los asientos 
+		
+        	
+      		JPanel panelAsientos = new JPanel();
+      		panelAsientos.setBackground(Color.DARK_GRAY);
+      		panelAsientos.setLayout(new GridLayout(5,10));
+      		
+      		
+      		ArrayList<Integer> nums = new ArrayList<>();
+      		for (int i =  1; i <=110 ; i ++) {
+      			nums.add(i);
+      		}
+      		
+      		//crear los 40 botones de asientos
+      		for( Integer num : nums) {
+      			JButton boton = new JButton(String.valueOf(num));
+      			boton.setBackground(Color.GREEN);
+      			boton.setPreferredSize(new Dimension(20,20));
+      			boton.setFont(new Font("Arial",Font.BOLD,12));
+      			
+      			
+      			boton.addActionListener(e -> {
+      				if(boton.isSelected()) {
+      					boton.setBackground(Color.BLUE);
+      				}
+      				
+      				//falta q cuando este ocupado se ponga en rojo 
+      				
+      			});
+      			
+      			panelAsientos.add(boton);
+      			
+      		}
+      		//Añadir en panel de asientos a la ventana 
+      		
+     		 getContentPane().add(panelAsientos, BorderLayout.CENTER);
+      		 
+      		 
     }
 
 	//MENSAJE
