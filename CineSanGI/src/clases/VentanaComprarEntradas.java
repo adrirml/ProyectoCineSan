@@ -122,16 +122,12 @@ public class VentanaComprarEntradas extends JFrame{
 		JLabel labelDescripcion = new JLabel(pelicula.getDescription());
         //Mostrar la ventana de selección de horario
         JButton botonSeleccionar = new JButton("Seleccionar");
+		   
+        JButton botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(e -> {
-			VentanaSeleccionarHorario2 ventanahorario = new VentanaSeleccionarHorario2();
+			VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.getTitulo());
 			ventanahorario.setVisible(true);
 		});
-        
-        //JButton botonSeleccionar = new JButton("Seleccionar");
-		//botonSeleccionar.addActionListener(e -> {
-			//VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.getTitulo());
-			//ventanahorario.setVisible(true);
-		//});
 
 		panelPelicula.add(labelLogo, BorderLayout.WEST);
 		panelInfo.add(botonSeleccionar);
