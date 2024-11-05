@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.*;
 import java.util.ArrayList;
-import java.awt.Image;
 import java.net.URL;
 
 public class VentanaComprarEntradas extends JFrame{
@@ -76,6 +75,11 @@ public class VentanaComprarEntradas extends JFrame{
 		this.getContentPane().add(panelSur,"South");
 		
 		
+		
+		
+		
+				
+		
 	}
 	//Array de Películas
 	private void inicializarPeliculas() {
@@ -132,6 +136,10 @@ public class VentanaComprarEntradas extends JFrame{
 		panelPelicula.add(panelInfo, BorderLayout.CENTER);
 		
 		return panelPelicula;
+	
+		
+		
+		
 	}
 	
 	public static void main(String[] args) {
