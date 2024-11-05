@@ -44,6 +44,8 @@ public class VentanaSeleccionHorario extends JFrame {
         panelCentral.add(sliderHora);
 		
         
+        
+        
         JLabel etiquetaDia = new JLabel("Selecciona el Día: Lunes"); // Valor inicial
         panelCentral.add(etiquetaDia);
 		//SLIDER DEL DIA
