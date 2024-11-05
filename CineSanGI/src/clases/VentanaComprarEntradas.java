@@ -1,6 +1,6 @@
 package clases;
 import java.awt.*;
-import java.util.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -8,9 +8,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.Image;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 public class VentanaComprarEntradas extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -20,15 +18,13 @@ public class VentanaComprarEntradas extends JFrame{
 	
 	public VentanaComprarEntradas() {
 
-	    // Inicializar la lista de peliculas
+	    //Inicializar la lista de peliculas
 	    inicializarPeliculas();
-
 	    //Paneles
 	    JPanel panelSur = new JPanel();
 	    JPanel panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	    JLabel labelPelis = new JLabel("PELICULAS");
-	  	JPanel panelbotones = new JPanel(); 
-	  	
+	  	JPanel panelbotones = new JPanel();
 	    JButton salir = new JButton("Salir");
 	  	//Confi Layout
 		setTitle("Compra de Entradas");
@@ -98,40 +94,10 @@ public class VentanaComprarEntradas extends JFrame{
 		labelTitulo.setFont(new Font(labelTitulo.getFont().getName(), Font.BOLD, 18));
 		//Descripción
 		JLabel labelDescripcion = new JLabel(pelicula.getDescription());
-		
-        Map<Integer, List<Integer>> horariosPorDia = new HashMap<>();
-        Random random = new Random();
-        int totalDias = 30; 
-        int diasDisponibles = 10;
-        int horaMinima = 17; 
-        int horaMaxima = 23;
-
-        // Generar 10 días aleatorios
-        Set<Integer> diasAleatorios = new HashSet<>();
-        while (diasAleatorios.size() < diasDisponibles) {
-            int diaAleatorio = random.nextInt(totalDias) + 1; // Genera entre 1 y 30
-            diasAleatorios.add(diaAleatorio);
-        }
-
-        //horarios aleatorios para cada día
-        for (int dia : diasAleatorios) {
-            int cantidadHoras = random.nextInt(4) + 2; // Entre 2 y 6 horarios por día
-            Set<Integer> horasDia = new HashSet<>();
-
-            // horas unicas para cada día
-            while (horasDia.size() < cantidadHoras) {
-                int horaAleatoria = random.nextInt(horaMaxima - horaMinima + 1) + horaMinima;
-                horasDia.add(horaAleatoria);
-            }
-            horariosPorDia.put(dia, new ArrayList<>(horasDia));
-        }
-		//Seleccionar -> Seleccionar la Hora en un nuevo Panel(Sí se pulsa)
-        HorarioPelícula horarioPelicula = new HorarioPelícula(pelicula, horariosPorDia);
-
-         //Mostrar la ventana de selección de horario
+        //Mostrar la ventana de selección de horario
         JButton botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(e -> {
-			VentanaSeleccionarHorario2 ventanahorario = new VentanaSeleccionarHorario2(horarioPelicula);
+			VentanaSeleccionarHorario2 ventanahorario = new VentanaSeleccionarHorario2();
 			ventanahorario.setVisible(true);
 		});
         
