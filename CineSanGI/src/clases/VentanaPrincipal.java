@@ -100,9 +100,10 @@ public class VentanaPrincipal extends JFrame{
 	        
 	        botonExtras.addActionListener(e ->{
 	        	
-	        	VentanaExtras ventanaExtras = new VentanaExtras();
+	        	VentanaExtras ventanaExtras = new VentanaExtras() ;
 	        	ventanaExtras.setVisible(true);
-		         this.dispose(); //cerramos la ventana y pasamos a la siguiente
+	        	this.dispose();
+	        	//cerramos la ventana y pasamos a la siguiente
 
 	        });
 	        
