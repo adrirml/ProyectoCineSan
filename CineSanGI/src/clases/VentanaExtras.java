@@ -4,16 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaExtras extends JFrame {
 
@@ -27,7 +31,7 @@ public class VentanaExtras extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 
         //layout:
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(10,10));
         
  
         //Panel principal 
@@ -76,22 +80,33 @@ public class VentanaExtras extends JFrame {
         //carrito 
         
         JLabel carrito = new JLabel("Carrito: ");
-        panel.add(carrito);
-        JTextArea carritotext = new JTextArea();
+        panel.add(carrito, BorderLayout.NORTH);
         
-        JScrollPane scroll = new JScrollPane(carritotext);
-        panel.add(scroll);
+        /*
+        JTextArea carritotext = new JTextArea();
+        carritotext.setEditable(false);	//desde el carrito no se puede editar
+        */
+        DefaultListModel<String> modeloCarrito = new DefaultListModel<String>();
+        JList<String> listaCarrito = new JList<String>(modeloCarrito);
+        
+        
+        
+        JScrollPane scroll = new JScrollPane(listaCarrito);
+        panel.add(scroll, BorderLayout.WEST);
+        
+        
         
         
         //Botones 
         JButton añadir = new JButton("Añadir");
         JButton finalizarCompra = new JButton("Finalizar compra");
+        JButton eliminarProducto = new JButton("Eliminar"); //para borrar del carrito el producto seleccionado
         
         //panel para los botones y añadirlos
         JPanel panelbotones = new JPanel();
         panelbotones.add(añadir);
         panelbotones.add(finalizarCompra);
-        
+        panelbotones.add(eliminarProducto);
         
         //añadir el panel de los botones a la ventana     
         add(panelbotones , BorderLayout.SOUTH);
@@ -146,8 +161,8 @@ public class VentanaExtras extends JFrame {
                 		precioPalomitas = 2.0;
                 	}
         			
-        			carritotext.append(compra +"----------- precio:" + precioPalomitas + "€" + "\n");
-        			
+        			//carritotext.append(compra +"----------- precio:" + precioPalomitas + "€" + "\n");
+        			modeloCarrito.addElement(compra +"----------- precio:" + precioPalomitas + "€" + "\n");
         		}
         		
         		//Precio de las bebidas
@@ -165,13 +180,16 @@ public class VentanaExtras extends JFrame {
         			else if(bebidaString.equals("Bebida Grande")) {
                 		precioBebidas = 2.5;
                 	}
-        			carritotext.append(compra +"----------- precio:" + precioBebidas + "€" + "\n");
+        			//carritotext.append(compra +"----------- precio:" + precioBebidas + "€" + "\n");
+        			modeloCarrito.addElement(compra +"----------- precio:" + precioBebidas + "€" + "\n");
         		}
         		if(compra.equals("Chuches ----------- precio:2€")) {
-        			carritotext.append(compra + "\n");
+        			//carritotext.append(compra + "\n");
+        			modeloCarrito.addElement(compra + "\n");
         		}
         		if(compra.equals("Alzador niño ----------- precio:1€")) {
-        			carritotext.append(compra + "\n");
+        			//carritotext.append(compra + "\n");
+        			modeloCarrito.addElement(compra + "\n");
         		}
         		
         	
@@ -189,11 +207,23 @@ public class VentanaExtras extends JFrame {
         		
         	}
         	
-        	carritotext.setText(""); //vaciar lo escrito en el carrito 
-        	
+        	//carritotext.setText(""); //vaciar lo escrito en el carrito 
+        	modeloCarrito.clear();
         	
         });
         
+        eliminarProducto.addActionListener(e -> {
+        	
+        	int productoEliminar = listaCarrito.getSelectedIndex();
+        	
+        	if(modeloCarrito.size() == 0) {
+        		JOptionPane.showMessageDialog(this, "No hay ningún producto en el carrito aún." + "\n" + "Añada los productos que desea comprar en el carrito");
+        	}else if(productoEliminar != -1) {
+        		modeloCarrito.remove(productoEliminar);
+        	}else {
+        		JOptionPane.showMessageDialog(this, "Por favor seleccione el producto que quiere eliminar del carrito");
+        	}
+        });
 
     
                
