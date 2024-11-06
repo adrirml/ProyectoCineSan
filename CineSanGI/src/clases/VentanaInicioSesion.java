@@ -21,6 +21,7 @@ public class VentanaInicioSesion extends JFrame {
 	private JPanel panelBotones;
 	private JButton siguiente;
 	private JButton salir;
+	private JButton anterior;
 	private JPanel panelSur;
 	private JPanel panelNorte;
 	private JLabel etiquetaCabecera;
@@ -48,8 +49,10 @@ public class VentanaInicioSesion extends JFrame {
         
         // Inicialización de componentes
         etiquetaCabecera = new JLabel("POR FAVOR, RELLENE LOS DATOS DE SU CUENTA");
+        anterior = new JButton("Anterior");
         siguiente = new JButton("Siguiente");
         salir = new JButton("Salir");
+       
         
         // Configuración del panel de botones
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
@@ -107,8 +110,10 @@ public class VentanaInicioSesion extends JFrame {
         panelBotones.add(panelContra);
         
         // Añadir botones de acción al panel sur
+        panelSur.add(anterior);
         panelSur.add(siguiente);
         panelSur.add(salir);
+        
         
         // Acción del botón salir
 		salir.addActionListener( new ActionListener() {
@@ -128,11 +133,18 @@ public class VentanaInicioSesion extends JFrame {
         this.getContentPane().add(panelSur,"South");
         
         
-        //mensaje comprobar datos introducidos:
+        //Botón anterior:
+        anterior.addActionListener(e -> {
+        	VentanaPrincipal ventanaprincipal = new VentanaPrincipal();
+			ventanaprincipal.setVisible(true);
+			this.dispose(); //se cierra esta ventana
+		});
+        
+        
         
       
 	}
-
+	//mensaje comprobar datos introducidos:
 	 private void mostrarMensaje() {
 		 
   	   String nombre = nombreClte.getText();
