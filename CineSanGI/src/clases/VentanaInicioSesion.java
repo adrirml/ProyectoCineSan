@@ -118,11 +118,45 @@ public class VentanaInicioSesion extends JFrame {
 			}
 		});
 		
+		
+		//Botón siguiente:
+		siguiente.addActionListener(e -> mostrarMensaje());
+		
 		//Posición
         this.getContentPane().add(panelNorte,"North");
         this.getContentPane().add(panelBotones,"Center");
         this.getContentPane().add(panelSur,"South");
         
+        
+        //mensaje comprobar datos introducidos:
+        
+      
 	}
 
+	 private void mostrarMensaje() {
+		 
+  	   String nombre = nombreClte.getText();
+  	   if(nombreClte.getText().isEmpty()) {
+  		   nombre = "Por favor introduzca su nombre";
+  	   }
+  	   
+  	   String edad = "Por favor seleccione su rango de edad";
+  	   if (edadMenor7.isSelected()) {
+  		   edad = "Menor de 7 años";
+  	   }else if(edadMenor18.isSelected()) {
+  		   edad = "Entre 7 y 18 años";
+  	   }else if(edadMenor60.isSelected()) {
+  		   edad = "Entre 18 y 60 años";
+  	   }else if(edadMas60.isSelected()) {
+  		   edad = "Más de 60 años";
+  	   }
+  	   
+  	   String correo = correoClte.getText();
+  	   if(correoClte.getText().isEmpty()) {
+  		   correo = "Por favor introduzca su correo";
+  	   }
+  	   
+  	   String mensaje = nombre + "\n" + edad + "\n" + correo;
+  	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
+     }
 }
