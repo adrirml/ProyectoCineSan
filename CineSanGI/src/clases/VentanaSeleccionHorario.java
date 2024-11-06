@@ -28,6 +28,8 @@ public class VentanaSeleccionHorario extends JFrame {
 	 private JRadioButton diaSabado;
 	 private JRadioButton diaDomingo;
 
+	 private ArrayList<Integer> asientosSeleccionados = new ArrayList<Integer>();
+	 
 	public VentanaSeleccionHorario(String tituloPelicula) {
 		setTitle("Compra de Entradas");
         setSize(800, 400);
@@ -114,65 +116,67 @@ public class VentanaSeleccionHorario extends JFrame {
         
       //panel de la sala para meter el esquema de los asientos 
 		
-        	JPanel salacine = new JPanel();
-      		salacine.setLayout(new BorderLayout(10,10));
+        JPanel salacine = new JPanel();
+      	salacine.setLayout(new BorderLayout(10,10));
 
-      		// panel donde se va indicar donde esta la pantalla
+      	// panel donde se va indicar donde esta la pantalla
       		
-      		JPanel pantallaPanel = new JPanel();
-      		pantallaPanel.setLayout(new BorderLayout());
-      		pantallaPanel.setBackground(Color.BLACK);
+      	JPanel pantallaPanel = new JPanel();
+      	pantallaPanel.setLayout(new BorderLayout());
+      	pantallaPanel.setBackground(Color.BLACK);
       		
-      		JTextField pantalla = new JTextField("PANTALLA");
-            pantalla.setEditable(false);    
-            pantalla.setHorizontalAlignment(JTextField.CENTER);
-            pantalla.setFont(new Font("Arial", Font.PLAIN, 24)); // Formato de la fuente
-            pantalla.setForeground(Color.WHITE);
-      		pantalla.setBackground(Color.GRAY);
+      	JTextField pantalla = new JTextField("PANTALLA");
+        pantalla.setEditable(false);    
+        pantalla.setHorizontalAlignment(JTextField.CENTER);
+        pantalla.setFont(new Font("Arial", Font.PLAIN, 24)); // Formato de la fuente
+        pantalla.setForeground(Color.WHITE);
+      	pantalla.setBackground(Color.GRAY);
       		
-      		//Añadimos la pantalla al panel de la salacine
-      		pantallaPanel.add(pantalla, BorderLayout.CENTER);
+      	//Añadimos la pantalla al panel de la salacine
+      	pantallaPanel.add(pantalla, BorderLayout.CENTER);
       		
-      		salacine.add(pantallaPanel, BorderLayout.NORTH);
+      	salacine.add(pantallaPanel, BorderLayout.NORTH);
       		
-      		//creamos el panel donde vamos a colocar los asientos
-      		JPanel panelAsientos = new JPanel();
-      		panelAsientos.setBackground(Color.DARK_GRAY);
-      		panelAsientos.setLayout(new GridLayout(11,10));
+      	//creamos el panel donde vamos a colocar los asientos
+      	JPanel panelAsientos = new JPanel();
+      	panelAsientos.setBackground(Color.DARK_GRAY);
+      	panelAsientos.setLayout(new GridLayout(11,10));
       		
       		
       		
-      		ArrayList<Integer> nums = new ArrayList<>();
-      		for (int i =  1; i <=110 ; i ++) {
-      			nums.add(i);
-      		}
+      	ArrayList<Integer> nums = new ArrayList<>();
+      	for (int i =  1; i <=110 ; i ++) {
+      		nums.add(i);
+      	}
       		
-      		//crear los 40 botones de asientos
-      		for( Integer num : nums) {
-      			JButton boton = new JButton(String.valueOf(num));
-      			boton.setBackground(Color.GREEN);
-      			boton.setPreferredSize(new Dimension(20,20));
-      			boton.setFont(new Font("Arial",Font.BOLD,12));
+      	//crear los 40 botones de asientos
+      	for( Integer num : nums) {
+      		JButton boton = new JButton(String.valueOf(num));
+      		boton.setBackground(Color.GREEN);
+      		boton.setPreferredSize(new Dimension(20,20));
+      		boton.setFont(new Font("Arial",Font.BOLD,12));
       			
       			
-      			boton.addActionListener(e -> {
-      				if(boton.getBackground() == Color.GREEN) {        //clickar para ocupar asiento
-      					boton.setBackground(Color.RED);
-      				}else {
-      					boton.setBackground(Color.GREEN);				// si lo vuelves a clickar se queda libre
-      				}
+      		boton.addActionListener(e -> {
+      			if(boton.getBackground() == Color.GREEN) {        //clickar para ocupar asiento
+      				boton.setBackground(Color.RED);
+      				asientosSeleccionados.add(num);				//añadimos a la lista
+      			}else {
+      				boton.setBackground(Color.GREEN);	// si lo vuelves a clickar se queda libre
+      				asientosSeleccionados.remove(num);	//lo quitamos de la lista
+      			}
       				
       				
-      			});
+      		});
       			
-      			panelAsientos.add(boton);
+      		panelAsientos.add(boton);
       			
-      		}
-      		//Añadir en panel de asientos al panel salacine y luego añadir este a la ventana 
+      	}
+      	//Añadir en panel de asientos al panel salacine y luego añadir este a la ventana 
       		
-      		 salacine.add(panelAsientos, BorderLayout.CENTER);
+      	salacine.add(panelAsientos, BorderLayout.CENTER);
       		
-     		 getContentPane().add(salacine, BorderLayout.CENTER);
+     	getContentPane().add(salacine, BorderLayout.CENTER);
       		 
       		 
     }
@@ -204,7 +208,15 @@ public class VentanaSeleccionHorario extends JFrame {
         } else if (hora3.isSelected()) {
             horaSeleccionada = "Hora seleccionada: 21:00";
         }
-        String mensaje = diaSeleccionado + "\n" + horaSeleccionada;
+        
+        
+        String asientos = "No se ha seleccionado ningún asiento.";
+        if(!asientosSeleccionados.isEmpty()) {
+        	asientos = "Asiento(s) seleccionado(s): " + asientosSeleccionados;
+        }
+        
+        
+        String mensaje = diaSeleccionado + "\n" + horaSeleccionada + "\n" + asientos;
         JOptionPane.showMessageDialog(this, mensaje, "Selección de Horario", JOptionPane.INFORMATION_MESSAGE);
     }    
 
