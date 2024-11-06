@@ -13,23 +13,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class VentanaExtras extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unlikely-arg-type")
 	public VentanaExtras() {
+		
 		setTitle("Comprar Extras Cine");
-		setSize(400,400);
+		setSize(600,800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 
         //layout:
         setLayout(new BorderLayout());
         
-        
-        
-        
-        
+ 
         //Panel principal 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5,2,10,10));
@@ -40,7 +40,7 @@ public class VentanaExtras extends JFrame {
         JLabel labelpalomitas = new JLabel("Palomitas: ");
         panel.add(labelpalomitas);
         
-        String[] tiposPalomitas = {"Sin palomitas"," palomitas pequeñas"," palomitas medianas"," palomitas grandes"};
+        String[] tiposPalomitas = {"Sin palomitas","Palomitas Pequeñas","Palomitas Medianas","Palomitas Grandes"};
         JComboBox palomitas = new JComboBox<>(tiposPalomitas);
         
         panel.add(palomitas);
@@ -50,7 +50,7 @@ public class VentanaExtras extends JFrame {
         JLabel labelBebidas = new JLabel("Bebidas: ");
         panel.add(labelBebidas);
         
-        String[] tiposBebidas = {"Sin bebida"," bebida pequeña"," bebida mediana","bebida grande"};
+        String[] tiposBebidas = {"Sin bebida","Bebida Pequeña","Bebida Mediana","Bebida Grande"};
         JComboBox bebidas = new JComboBox<>(tiposBebidas);
         
         panel.add(bebidas);
@@ -77,7 +77,7 @@ public class VentanaExtras extends JFrame {
         
         JLabel carrito = new JLabel("Carrito: ");
         panel.add(carrito);
-        JTextArea carritotext = new JTextArea(10,30);
+        JTextArea carritotext = new JTextArea();
         
         JScrollPane scroll = new JScrollPane(carritotext);
         panel.add(scroll);
@@ -97,22 +97,25 @@ public class VentanaExtras extends JFrame {
         add(panelbotones , BorderLayout.SOUTH);
       
         
+        
         //listeners de las acciones de los botones añadir y finalizar compra   
         
         añadir.addActionListener(e -> {
         	
         	ArrayList<String> compras = new ArrayList<String>();
         	
+        	//añadir los productos al text area del carrito
         	
-        	String palomita = (String) palomitas.getSelectedItem();
-        	if(!palomita.equals("Sin palomitas")) {
-        		compras.add(palomita);
+        	String palomitaString = (String) palomitas.getSelectedItem();
+        	if(!palomitaString.equals("Sin palomitas")) {
+        		compras.add(palomitaString);
         	}
         	
         	
-        	String bebida = (String) bebidas.getSelectedItem();
-        	if(!bebida.equals("Sin bebida")) {
-        		compras.add(bebida);
+        	String bebidaString = (String) bebidas.getSelectedItem();
+        	
+        	if(!bebidaString.equals("Sin bebida")) {
+        		compras.add(bebidaString);
         	}
         	
         	if (chuchesCheck.isSelected()) {
@@ -123,38 +126,56 @@ public class VentanaExtras extends JFrame {
         		compras.add("Alzador niño ----------- precio:1€");
         	}
         	
-        	
+        	//añadir los precios al text area del carrito
         	for( String compra : compras) {
         		
-        		double precioPalomitas = 0.0;
-            	double precioBebidas = 0.0;
-            	
-        		if(compra.equals(palomita)) {
-        			if(palomita.equals("palomitas pequeñas")) {
-                		precioPalomitas = 1.5;
-                	}if(palomita.equals("palomitas medianas")) {
-                		precioPalomitas= 2;
-                	}if(palomita.equals("palomitas grandes")) {
-                		precioPalomitas = 2.5;
+
+            	//Precio para las palomitas 
+        		
+        		if(compra.equals(palomitaString)) {
+        			
+        			double precioPalomitas = 0.0;
+        			
+        			if(palomitaString.equals("Palomitas Pequeñas")) {
+                		precioPalomitas = 1.0;
                 	}
-        			carritotext.append(compra +"----------- precio:" + precioPalomitas + "\n");
+        			else if(palomitaString.equals("Palomitas Medianas")) {
+                		precioPalomitas= 1.5;
+                	}
+        			else if(palomitaString.equals("Palomitas Grandes")) {
+                		precioPalomitas = 2.0;
+                	}
         			
-        		}if(compra.equals(bebida)) {
+        			carritotext.append(compra +"----------- precio:" + precioPalomitas + "€" + "\n");
         			
-        			if(bebida.equals("bebida pequeña")) {
+        		}
+        		
+        		//Precio de las bebidas
+        		
+        		else if(compra.equals(bebidaString)) {
+        			
+        			double precioBebidas = 0.0;
+        			
+        			if(bebidaString.equals("Bebida Pequeña")) {
                 		precioBebidas = 1.5;
-                	}if(bebida.equals("bebida mediana")) {
-                		precioBebidas= 2;
-                	}if(bebida.equals("bebida grande")) {
+                	}
+        			else if(bebidaString.equals("Bebida Mediana")) {
+                		precioBebidas= 2.0;
+                	}
+        			else if(bebidaString.equals("Bebida Grande")) {
                 		precioBebidas = 2.5;
                 	}
-        			carritotext.append(compra +"----------- precio:" + precioBebidas + "\n");
-        		}else 
+        			carritotext.append(compra +"----------- precio:" + precioBebidas + "€" + "\n");
+        		}
+        		if(compra.equals("Chuches ----------- precio:2€")) {
         			carritotext.append(compra + "\n");
-        	}
+        		}
+        		if(compra.equals("Alzador niño ----------- precio:1€")) {
+        			carritotext.append(compra + "\n");
+        		}
+        		
         	
-        	
-        	
+        	} 	
         });
         
         finalizarCompra.addActionListener(e -> {
