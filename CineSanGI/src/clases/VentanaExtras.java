@@ -97,12 +97,13 @@ public class VentanaExtras extends JFrame {
         add(panelbotones , BorderLayout.SOUTH);
       
         
-        //listeners de las acciones de los botones añadir y finalizar compra      
+        //listeners de las acciones de los botones añadir y finalizar compra   
+        
         añadir.addActionListener(e -> {
         	
         	ArrayList<String> compras = new ArrayList<String>();
         	
-        	//funcion añadir 
+        	
         	String palomita = (String) palomitas.getSelectedItem();
         	if(!palomita.equals("Sin palomitas")) {
         		compras.add(palomita);
@@ -115,21 +116,60 @@ public class VentanaExtras extends JFrame {
         	}
         	
         	if (chuchesCheck.isSelected()) {
-        		compras.add("Chuches");	
+        		compras.add("Chuches ----------- precio:2€");	
         	}
         	
         	if(asientos.isSelected()) {
-        		compras.add("Alzador niño");
+        		compras.add("Alzador niño ----------- precio:1€");
         	}
         	
+        	
         	for( String compra : compras) {
-        		carritotext.append(compra);
+        		
+        		double precioPalomitas = 0.0;
+            	double precioBebidas = 0.0;
+            	
+        		if(compra.equals(palomita)) {
+        			if(palomita.equals("palomitas pequeñas")) {
+                		precioPalomitas = 1.5;
+                	}if(palomita.equals("palomitas medianas")) {
+                		precioPalomitas= 2;
+                	}if(palomita.equals("palomitas grandes")) {
+                		precioPalomitas = 2.5;
+                	}
+        			carritotext.append(compra +"----------- precio:" + precioPalomitas + "\n");
+        			
+        		}if(compra.equals(bebida)) {
+        			
+        			if(bebida.equals("bebida pequeña")) {
+                		precioBebidas = 1.5;
+                	}if(bebida.equals("bebida mediana")) {
+                		precioBebidas= 2;
+                	}if(bebida.equals("bebida grande")) {
+                		precioBebidas = 2.5;
+                	}
+        			carritotext.append(compra +"----------- precio:" + precioBebidas + "\n");
+        		}else 
+        			carritotext.append(compra + "\n");
         	}
+        	
+        	
+        	
         });
         
         finalizarCompra.addActionListener(e -> {
-        	JOptionPane.showMessageDialog(null,"Finalizar la compra: ");
-        	carritotext.setText(""); //vaciarlo 
+        	int resultado = JOptionPane.showConfirmDialog(null, "¿Deseas finalizar la compra?","Confirmacion",JOptionPane.OK_CANCEL_OPTION);
+        	
+        	
+        	if(resultado == JOptionPane.OK_OPTION) {
+        		VentanaPago ventanapago = new VentanaPago();
+        		ventanapago.setVisible(true);
+        		dispose();  //se cierra la ventana actual 
+        		
+        	}
+        	
+        	carritotext.setText(""); //vaciar lo escrito en el carrito 
+        	
         	
         });
         
