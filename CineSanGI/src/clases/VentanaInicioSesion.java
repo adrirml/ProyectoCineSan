@@ -25,6 +25,14 @@ public class VentanaInicioSesion extends JFrame {
 	private JPanel panelNorte;
 	private JLabel etiquetaCabecera;
 	
+	private JTextField nombreClte;
+	private String edad;
+	private JRadioButton edadMenor7;
+	private JRadioButton edadMenor18;
+	private JRadioButton edadMenor60;
+	private JRadioButton edadMas60;
+	private JTextField correoClte;
+	
 	// constructor
 	public VentanaInicioSesion() {
         // Configuración de la ventana
@@ -32,45 +40,55 @@ public class VentanaInicioSesion extends JFrame {
 		setSize(400,450);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         setLayout(new BorderLayout());
+        
         // Creación de los paneles
         panelNorte = new JPanel();
         panelBotones = new JPanel();
         panelSur = new JPanel();
+        
         // Inicialización de componentes
         etiquetaCabecera = new JLabel("POR FAVOR, RELLENE LOS DATOS DE SU CUENTA");
         siguiente = new JButton("Siguiente");
         salir = new JButton("Salir");
+        
         // Configuración del panel de botones
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
         panelBotones.setBorder(BorderFactory.createEmptyBorder(10,10, 10,10));
         panelBotones.setBackground(Color.LIGHT_GRAY);
         add(panelBotones, BorderLayout.CENTER);
+        
         // Panel para el nombre
         JPanel panelNombreClte = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
         JLabel lblNombre = new JLabel("Nombre: ");
-        JTextField nombreClte = new JTextField(10);
+        nombreClte = new JTextField(10);
+        
         // Panel para la edad
         JPanel panelEdad = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
         JLabel lblEdadClte = new JLabel("Edad: ");
-        JRadioButton edadMenor7 = new JRadioButton("Menor de 7");
-        JRadioButton edadMenor18 = new JRadioButton("Entre 7 y 18");
-        JRadioButton edadMenor60 = new JRadioButton("Entre 18 y 60");
-        JRadioButton edadMas60 = new JRadioButton("Mayor de 60"); 
+        edadMenor7 = new JRadioButton("Menor de 7");
+        edadMenor18 = new JRadioButton("Entre 7 y 18");
+        edadMenor60 = new JRadioButton("Entre 18 y 60");
+        edadMas60 = new JRadioButton("Mayor de 60");
+        
         // Panel para el correo
         JPanel panelCorreo = new JPanel( new FlowLayout(FlowLayout.LEFT,5,5));
         JLabel lblCorreoClte = new JLabel("Correo electrónico: ");
-        JTextField correoClte = new JTextField(20);
+        correoClte = new JTextField(20);
+        
         // Panel para la contraseña
         JPanel panelContra = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
         JLabel lblContra = new JLabel("Contraseña: ");
         JPasswordField contrasenya = new JPasswordField(15);
+        
         //Añadir paneles de entrada de datos al panel de botones
         panelBotones.add(panelNombreClte);
         panelBotones.add(panelEdad);
         panelBotones.add(panelCorreo);
         panelBotones.add(panelContra);
+        
         // Añadir etiqueta de cabecera al panel norte
         panelNorte.add(etiquetaCabecera);
+        
         //Añadir componentes de entrada de datos al panel de botones
         panelBotones.add(lblNombre);
         panelBotones.add(nombreClte);
@@ -87,9 +105,11 @@ public class VentanaInicioSesion extends JFrame {
         panelBotones.add(panelEdad);
         panelBotones.add(panelCorreo);
         panelBotones.add(panelContra);
+        
         // Añadir botones de acción al panel sur
         panelSur.add(siguiente);
         panelSur.add(salir);
+        
         // Acción del botón salir
 		salir.addActionListener( new ActionListener() {
 			@Override
@@ -97,6 +117,7 @@ public class VentanaInicioSesion extends JFrame {
 				dispose();
 			}
 		});
+		
 		//Posición
         this.getContentPane().add(panelNorte,"North");
         this.getContentPane().add(panelBotones,"Center");
