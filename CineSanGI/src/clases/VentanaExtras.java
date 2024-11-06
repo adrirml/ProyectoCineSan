@@ -2,6 +2,7 @@ package clases;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -25,29 +26,36 @@ public class VentanaExtras extends JFrame {
         //layout:
         setLayout(new BorderLayout());
         
+        
+        
+        
+        
         //Panel principal 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5,2,10,10));
         add(panel , BorderLayout.CENTER);
+        
+        
         //combobox para las palomitas 
-     
         JLabel labelpalomitas = new JLabel("Palomitas: ");
         panel.add(labelpalomitas);
-        String[] tiposPalomitas = {"Sin palomitas","pequeñas","medianas","grandes"};
+        
+        String[] tiposPalomitas = {"Sin palomitas"," palomitas pequeñas"," palomitas medianas"," palomitas grandes"};
         JComboBox palomitas = new JComboBox<>(tiposPalomitas);
+        
         panel.add(palomitas);
         
         
-        //combobox de las bebidas
-        
+        //combobox de las bebidas 
         JLabel labelBebidas = new JLabel("Bebidas: ");
         panel.add(labelBebidas);
-        String[] tiposBebidas = {"Sin bebida","pequeña","mediana","grande"};
+        
+        String[] tiposBebidas = {"Sin bebida"," bebida pequeña"," bebida mediana","bebida grande"};
         JComboBox bebidas = new JComboBox<>(tiposBebidas);
+        
         panel.add(bebidas);
         
-        //checkbox chuches 
-        
+        //checkbox chuches      
         JLabel chuches = new JLabel("Chuches: ");
         panel.add(chuches);
         
@@ -62,52 +70,73 @@ public class VentanaExtras extends JFrame {
         JCheckBox asientos = new JCheckBox("Añadir alzador: ");
         panel.add(asientos);
         
+        //se utilizan checkbox para poder elegir ambos a la vez 
         
         
         //carrito 
         
         JLabel carrito = new JLabel("Carrito: ");
         panel.add(carrito);
-        JTextArea carritotext = new JTextArea(5,20);
+        JTextArea carritotext = new JTextArea(10,30);
         
         JScrollPane scroll = new JScrollPane(carritotext);
         panel.add(scroll);
         
         
         //Botones 
-        JButton añadir = new JButton("Añadir: ");
-        JButton finalizarCompra = new JButton("Finalizar compra: ");
-        
-        
-        //listeners de las acciones de los botones añadir y finalizar compra 
-        
-        añadir.addActionListener(e -> {
-        	//funcion añadir 
-        	añadirAlCarrito();
-        	
-        });
-        
-        finalizarCompra.addActionListener(e -> {
-        	JOptionPane.showMessageDialog(null,"finalizar compra: ");
-        	carritotext.setText(""); //vaciarlo 
-        	
-        });
-        
+        JButton añadir = new JButton("Añadir");
+        JButton finalizarCompra = new JButton("Finalizar compra");
         
         //panel para los botones y añadirlos
         JPanel panelbotones = new JPanel();
         panelbotones.add(añadir);
         panelbotones.add(finalizarCompra);
         
-        //añadir el panel de los botones a la ventana 
         
+        //añadir el panel de los botones a la ventana     
         add(panelbotones , BorderLayout.SOUTH);
+      
+        
+        //listeners de las acciones de los botones añadir y finalizar compra      
+        añadir.addActionListener(e -> {
+        	
+        	ArrayList<String> compras = new ArrayList<String>();
+        	
+        	//funcion añadir 
+        	String palomita = (String) palomitas.getSelectedItem();
+        	if(!palomita.equals("Sin palomitas")) {
+        		compras.add(palomita);
+        	}
+        	
+        	
+        	String bebida = (String) bebidas.getSelectedItem();
+        	if(!bebida.equals("Sin bebida")) {
+        		compras.add(bebida);
+        	}
+        	
+        	if (chuchesCheck.isSelected()) {
+        		compras.add("Chuches");	
+        	}
+        	
+        	if(asientos.isSelected()) {
+        		compras.add("Alzador niño");
+        	}
+        	
+        	for( String compra : compras) {
+        		carritotext.append(compra);
+        	}
+        });
+        
+        finalizarCompra.addActionListener(e -> {
+        	JOptionPane.showMessageDialog(null,"Finalizar la compra: ");
+        	carritotext.setText(""); //vaciarlo 
+        	
+        });
+        
+
+    
                
 }
 	
-	//metodo para añadir al carrito 
 	
-	private void añadirAlCarrito() {
-		
-	}
 }
