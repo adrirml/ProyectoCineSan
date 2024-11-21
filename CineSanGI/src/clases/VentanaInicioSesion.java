@@ -73,6 +73,13 @@ public class VentanaInicioSesion extends JFrame {
         edadMenor60 = new JRadioButton("Entre 18 y 60");
         edadMas60 = new JRadioButton("Mayor de 60");
         
+        // Meter los Radio Button en un ButtonGroup para que solo puedas seleccionar una opcion
+        ButtonGroup grupoEdad = new ButtonGroup();
+        grupoEdad.add(edadMenor7);
+        grupoEdad.add(edadMenor18);
+        grupoEdad.add(edadMenor60);
+        grupoEdad.add(edadMas60);
+
         // Panel para el correo
         JPanel panelCorreo = new JPanel( new FlowLayout(FlowLayout.LEFT,5,5));
         JLabel lblCorreoClte = new JLabel("Correo electrónico: ");
@@ -171,4 +178,5 @@ public class VentanaInicioSesion extends JFrame {
   	   String mensaje = nombre + "\n" + edad + "\n" + correo;
   	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
      }
+	 
 }

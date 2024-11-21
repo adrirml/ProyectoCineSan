@@ -2,6 +2,8 @@ package clases;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -18,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+
 
 public class VentanaExtras extends JFrame {
 
@@ -26,6 +30,37 @@ public class VentanaExtras extends JFrame {
 	@SuppressWarnings("unlikely-arg-type")
 	public VentanaExtras() {
 		
+		
+		
+		URL palomitasURL = getClass().getResource("/images/palomitas.png");
+        URL bebidaURL = getClass().getResource("/images/bebida.png"); // 
+        URL chuchesURL = getClass().getResource("/images/chuches.png"); 
+        URL alzadorURL = getClass().getResource("/images/alzador.png"); 
+        
+        ImageIcon iconoPal = new ImageIcon(palomitasURL);
+        ImageIcon iconoBe = new ImageIcon(bebidaURL);
+        ImageIcon iconoChu = new ImageIcon(chuchesURL);
+        ImageIcon iconoAlz = new ImageIcon(alzadorURL);
+
+        //Redimensionar las imagenes
+        
+        Image imagenPal = iconoPal.getImage();
+        Image Palred = imagenPal.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon iconPalred = new ImageIcon(Palred);
+        
+        Image imagenBe = iconoBe.getImage();
+        Image Bered = imagenBe.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon iconBered = new ImageIcon(Bered);
+        
+        Image imagenCh = iconoChu.getImage();
+        Image Chred = imagenCh.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon iconChred = new ImageIcon(Chred);
+        
+        Image imagenAlz = iconoAlz.getImage();
+        Image Alred = imagenAlz.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon iconAlred = new ImageIcon(Alred);
+        
+        
 		setTitle("Comprar Extras Cine");
 		setSize(600,800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
@@ -36,42 +71,61 @@ public class VentanaExtras extends JFrame {
  
         //Panel principal 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5,2,10,10));
+        panel.setLayout(new GridLayout(5,3,10,10));
         add(panel , BorderLayout.CENTER);
         
         
         //combobox para las palomitas 
+        JLabel labelPalomitasImg = new JLabel();
+        labelPalomitasImg.setIcon(iconPalred);
         JLabel labelpalomitas = new JLabel("Palomitas: ");
-        panel.add(labelpalomitas);
         
         String[] tiposPalomitas = {"Sin palomitas","Palomitas Pequeñas","Palomitas Medianas","Palomitas Grandes"};
         JComboBox palomitas = new JComboBox<>(tiposPalomitas);
         
+        panel.add(labelPalomitasImg);
+        panel.add(labelpalomitas);
         panel.add(palomitas);
         
         
         //combobox de las bebidas 
+        
+        JLabel labelBebidasImg = new JLabel();
+        labelBebidasImg.setIcon(iconBered);
+
         JLabel labelBebidas = new JLabel("Bebidas: ");
-        panel.add(labelBebidas);
         
         String[] tiposBebidas = {"Sin bebida","Bebida Pequeña","Bebida Mediana","Bebida Grande"};
         JComboBox bebidas = new JComboBox<>(tiposBebidas);
         
+        panel.add(labelBebidasImg);
+        panel.add(labelBebidas);
         panel.add(bebidas);
         
         //checkbox chuches      
+        
+        JLabel labelChuchesImg = new JLabel();
+        labelChuchesImg.setIcon(iconChred);
+
         JLabel chuches = new JLabel("Chuches: ");
-        panel.add(chuches);
         
         JCheckBox chuchesCheck = new JCheckBox("Añadir chuches: ");
+        panel.add(labelChuchesImg);
+        panel.add(chuches);
         panel.add(chuchesCheck);
         
         
         //checkBox de los alzadores de niños 
+        
+        JLabel labelAlzadoresImg = new JLabel();
+        labelAlzadoresImg.setIcon(iconAlred);
+
         JLabel alzador = new JLabel("Alzadores para niños: ");
-        panel.add(alzador);
         
         JCheckBox asientos = new JCheckBox("Añadir alzador: ");
+        
+        panel.add(labelAlzadoresImg);
+        panel.add(alzador);
         panel.add(asientos);
         
         //se utilizan checkbox para poder elegir ambos a la vez 
