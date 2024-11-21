@@ -29,9 +29,7 @@ public class VentanaExtras extends JFrame {
 
 	@SuppressWarnings("unlikely-arg-type")
 	public VentanaExtras() {
-		
-		
-		
+		//Carga de fotos
 		URL palomitasURL = getClass().getResource("/images/palomitas.png");
         URL bebidaURL = getClass().getResource("/images/bebida.png"); // 
         URL chuchesURL = getClass().getResource("/images/chuches.png"); 
@@ -41,7 +39,9 @@ public class VentanaExtras extends JFrame {
         ImageIcon iconoBe = new ImageIcon(bebidaURL);
         ImageIcon iconoChu = new ImageIcon(chuchesURL);
         ImageIcon iconoAlz = new ImageIcon(alzadorURL);
-
+ 
+		
+		
         //Redimensionar las imagenes
         
         Image imagenPal = iconoPal.getImage();
