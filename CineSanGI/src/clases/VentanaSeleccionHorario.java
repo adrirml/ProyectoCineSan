@@ -110,9 +110,15 @@ public class VentanaSeleccionHorario extends JFrame {
 
         // BOTÓN DE CONFIRMAR
         JButton confirmarButton = new JButton("Confirmar");
-        confirmarButton.addActionListener(e -> mostrarSeleccion());
+        //confirmarButton.addActionListener(e -> mostrarSeleccion());
         add(confirmarButton, BorderLayout.SOUTH);
-        
+        confirmarButton.addActionListener(e -> {
+        	if(mostrarSeleccion()== true) {
+        		VentanaPago ventanaPago = new VentanaPago();
+            	ventanaPago.setVisible(true);
+        	}
+        	
+        });
         
       //panel de la sala para meter el esquema de los asientos 
 		
@@ -182,7 +188,7 @@ public class VentanaSeleccionHorario extends JFrame {
     }
 
 	//MENSAJE
-    private void mostrarSeleccion() {
+    private boolean mostrarSeleccion() {
         String diaSeleccionado = "No se ha seleccionado ningún día.";
         if (diaLunes.isSelected()) {
             diaSeleccionado = "Día seleccionado: Lunes";
@@ -199,6 +205,7 @@ public class VentanaSeleccionHorario extends JFrame {
         } else if (diaDomingo.isSelected()) {
             diaSeleccionado = "Día seleccionado: Domingo";
         }
+        
 
         String horaSeleccionada = "No se ha seleccionado ninguna hora.";
         if (hora1.isSelected()) {
@@ -207,7 +214,8 @@ public class VentanaSeleccionHorario extends JFrame {
             horaSeleccionada = "Hora seleccionada: 18:00";
         } else if (hora3.isSelected()) {
             horaSeleccionada = "Hora seleccionada: 21:00";
-        }
+        } 
+        
         
         
         String asientos = "No se ha seleccionado ningún asiento.";
@@ -216,8 +224,30 @@ public class VentanaSeleccionHorario extends JFrame {
         }
         
         
-        String mensaje = diaSeleccionado + "\n" + horaSeleccionada + "\n" + asientos;
-        JOptionPane.showMessageDialog(this, mensaje, "Selección de Horario", JOptionPane.INFORMATION_MESSAGE);
+        if (diaSeleccionado.equals("No se ha seleccionado ningún día.") || 
+        		horaSeleccionada.equals("No se ha seleccionado ninguna hora.") || 
+        		asientos.equals("No se ha seleccionado ningún asiento.")) {
+        	String mensaje= "";
+        	if (diaSeleccionado.equals("No se ha seleccionado ningún día.")){
+        		mensaje += "Es necesaria la selección de un día";
+        		mensaje += "\n";
+        	}if(horaSeleccionada.equals("No se ha seleccionado ninguna hora.")) {
+        		mensaje += "Es necesaria la selección de una hora";
+        		mensaje += "\n";
+        	}if(asientos.equals("No se ha seleccionado ningún asiento.")) {
+        		mensaje += "Es necesaria la selección de un asiento";
+        		mensaje += "\n";
+        	}
+        	JOptionPane.showMessageDialog(this, mensaje, "Selección de Horario", JOptionPane.WARNING_MESSAGE);
+        	return false;
+        }else {
+            String mensaje = diaSeleccionado + "\n" + horaSeleccionada + "\n" + asientos;
+            JOptionPane.showMessageDialog(this, mensaje, "Selección de Horario", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+        
+        
+
     }    
 
 }
