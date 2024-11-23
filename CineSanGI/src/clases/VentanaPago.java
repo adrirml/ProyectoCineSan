@@ -116,7 +116,13 @@ public class VentanaPago extends JFrame {
 		panelBotones.add(botonCancelar);
 		
 		
-		
+		//BOTÓN ATRÁS:
+				botonAtras.addActionListener(e -> {
+			        	VentanaComprarEntradas ventanaComprarEntradas = new VentanaComprarEntradas();
+			        	ventanaComprarEntradas.setVisible(true);
+						this.dispose(); //se cierra esta ventana
+					});
+				
 		
 		
 		//añadimos paneles a la ventana:
