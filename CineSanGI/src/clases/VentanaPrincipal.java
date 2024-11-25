@@ -20,8 +20,9 @@ public class VentanaPrincipal extends JFrame{
 	private JPanel panelBotones;	//boton comprar entradas, iniciar sesion, comprar extras
 	
 	private JButton botonEntradas;
-	private JButton botonIniciarSesion; 
+	private JButton botonRegistrarse; 
 	private JButton botonExtras; 
+	private JButton botonInicioSesion;
 	
 	
 	public VentanaPrincipal() {
@@ -64,17 +65,19 @@ public class VentanaPrincipal extends JFrame{
 	        
 	        //inicializamos componentes:
 	        botonEntradas = new JButton("Comprar entradas");
-	        botonIniciarSesion = new JButton("Iniciar Sesion");
+	        botonRegistrarse = new JButton("Registrarse");
+	        botonInicioSesion = new JButton("Inicio Sesión");
 	        botonExtras = new JButton("Extras");
 	  
 	        
 	        botonEntradas.setSize(150,40);
-	        botonIniciarSesion.setSize(150,40);
+	        botonRegistrarse.setSize(150,40);
 	        botonExtras.setSize(150,40);
 
 	        //añadir los botones
 	        panelBotones.add(botonEntradas);
-	        panelBotones.add(botonIniciarSesion);
+	        panelBotones.add(botonRegistrarse);
+	        panelBotones.add(botonInicioSesion);
 	        panelBotones.add(botonExtras);
 	        add(panelBotones, BorderLayout.CENTER);
 	      	        
@@ -87,14 +90,28 @@ public class VentanaPrincipal extends JFrame{
 	        		     
 	        });
 	        
-	        //INICIAR SESION
-	        botonIniciarSesion.addActionListener(e ->{
+	        //REGISTRARSE
+	        botonRegistrarse.addActionListener(e ->{
 	        	
-	        	VentanaInicioSesion ventanaInicio = new VentanaInicioSesion();
-	        	ventanaInicio.setVisible(true);
+	        	VentanaRegistro ventanaRegistro = new VentanaRegistro();
+	        	ventanaRegistro.setVisible(true);
 		         this.dispose(); //cerramos la ventana y pasamos a la siguiente
 
 	        });
+	        
+	        
+	        
+	        
+	        //INICIO SESION 
+	        
+	        botonInicioSesion.addActionListener(e -> {
+	        	VentanaInicioSesion ventanaInicioSesion = new VentanaInicioSesion();
+	        	ventanaInicioSesion.setVisible(true);
+	        	this.dispose();
+	        	
+	        });
+	        
+	        
 	        
 	        //EXTRAS
 	        

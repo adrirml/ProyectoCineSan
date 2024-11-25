@@ -114,8 +114,13 @@ public class VentanaSeleccionHorario extends JFrame {
         add(confirmarButton, BorderLayout.SOUTH);
         confirmarButton.addActionListener(e -> {
         	if(mostrarSeleccion()== true) {
-        		VentanaPago ventanaPago = new VentanaPago();
-            	ventanaPago.setVisible(true);
+        		
+        		VentanaSiguiente ventanaSiguiente = new VentanaSiguiente();
+        		ventanaSiguiente.setVisible(true);
+        		
+        		
+        		//VentanaPago ventanaPago = new VentanaPago();
+            	//ventanaPago.setVisible(true);
         	}
         	
         });
