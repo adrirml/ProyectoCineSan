@@ -118,8 +118,9 @@ public class VentanaPago extends JFrame {
 		
 		//BOTÓN ATRÁS:
 				botonAtras.addActionListener(e -> {
-			        	VentanaComprarEntradas ventanaComprarEntradas = new VentanaComprarEntradas();
-			        	ventanaComprarEntradas.setVisible(true);
+						
+			        	VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+			        	ventanaPrincipal.setVisible(true);
 						this.dispose(); //se cierra esta ventana
 					});
 				
