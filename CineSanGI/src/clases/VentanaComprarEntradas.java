@@ -126,6 +126,7 @@ public class VentanaComprarEntradas extends JFrame{
 		botonSeleccionar.addActionListener(e -> {
 			VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.getTitulo());
 			ventanahorario.setVisible(true);
+			this.dispose();
 		});
 
 		panelPelicula.add(labelLogo, BorderLayout.WEST);

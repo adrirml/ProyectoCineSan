@@ -117,6 +117,8 @@ public class VentanaSeleccionHorario extends JFrame {
         		
         		VentanaSiguiente ventanaSiguiente = new VentanaSiguiente();
         		ventanaSiguiente.setVisible(true);
+        		this.dispose();
+        		
         		
         		
         		//VentanaPago ventanaPago = new VentanaPago();
