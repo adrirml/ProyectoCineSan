@@ -159,8 +159,18 @@ public class VentanaPago extends JFrame {
 				
 		//BOTÓN CANCELAR:
 		//cierra la ventana:
+				botonCancelar.addActionListener(e ->{
+					int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de que quiere cancelar el pago?", "Cancelar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					
+					if(respuesta == JOptionPane.OK_OPTION) {
+						//si pulsa OK:
+						
+						VentanaPrincipal ventanaPrincipal= new VentanaPrincipal();
+						ventanaPrincipal.setVisible(true);
+						this.dispose();
+					}
+				});
 				
-		
 		//añadimos paneles a la ventana:
 		add(panelDatos, BorderLayout.EAST);
 		add(panelBotones, BorderLayout.SOUTH);
