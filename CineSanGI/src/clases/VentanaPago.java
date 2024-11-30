@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +27,13 @@ public class VentanaPago extends JFrame {
 	private JPanel panelValidez;
 	private JPanel panelImagen;
 	private JPanel panelBotones;
+	
+	private JTextField txtNombre;
+	private JTextField txtNumTarjeta;
+	private JComboBox<String> comboMes;
+	private JTextField txtCVV;
+	private JComboBox<String> comboAnyo;
+	
 	
 	public VentanaPago() {
 		setTitle("Pago");
@@ -53,10 +61,12 @@ public class VentanaPago extends JFrame {
 		
 		JLabel lblNombre = new JLabel("Nombre: ");
 		lblNombre.setFont(new Font("Arial", Font.BOLD, 18));
-		JTextField txtNombre = new JTextField();
+		txtNombre = new JTextField();
+		
 		JLabel lblNumTarjeta = new JLabel("Número de la tarjeta de crédito: ");
 		lblNumTarjeta.setFont(new Font("Arial", Font.BOLD, 18));
-		JTextField txtNumTarjeta = new JTextField();
+		txtNumTarjeta = new JTextField();
+		
 		JLabel lblValidez = new JLabel("Validez: ");
 		lblValidez.setFont(new Font("Arial", Font.BOLD, 18));
 		
@@ -78,19 +88,19 @@ public class VentanaPago extends JFrame {
 		JLabel lblMes = new JLabel("MES: ");
 		lblMes.setFont(new Font("Arial", Font.BOLD, 15));
 		String[] meses = { "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
-		JComboBox<String> comboMes = new JComboBox<>(meses);
+		comboMes = new JComboBox<>(meses);
 		comboMes.setPreferredSize(new Dimension(120, 10));
 		
 		
 		JLabel lblAnyo = new JLabel("AÑO: ");
 		lblAnyo.setFont(new Font("Arial", Font.BOLD, 15));
 		String[] anyos = { "2024","2025", "2026","2027","2028", "2029", "2030", "2031", "2032", "2033"};
-		JComboBox<String> comboAnyo= new JComboBox<>(anyos);
-		//comboAnyo.setPreferredSize(new Dimension(150,30));
+		comboAnyo= new JComboBox<>(anyos);
+		
 		
 		JLabel lblCVV = new JLabel("CVV: ");
 		lblCVV.setFont(new Font("Arial", Font.BOLD, 15));
-		JTextField txtCVV = new JTextField();
+		txtCVV = new JTextField();
 		txtCVV.setFont(new Font("Arial", Font.PLAIN, 18));
 		txtCVV.setPreferredSize(new Dimension(100,25));
 		
@@ -131,11 +141,20 @@ public class VentanaPago extends JFrame {
 		//ventana cargar con ruleta
 				botonConfirmar.addActionListener(e -> {
 					
-					VentanaCargar ventanaCargar = new VentanaCargar();
-					ventanaCargar.setVisible(true);
 					
-					this.dispose(); //cierra la ventana				
-					
+					if(txtNombre.getText().isEmpty() || txtNumTarjeta.getText().isEmpty() || 
+							comboMes.getSelectedIndex()==0 || comboAnyo.getSelectedIndex()==0 || txtCVV.getText().isEmpty() ) {
+						
+						//si alguna está vacía:
+						JOptionPane.showMessageDialog(this, "Es necesario que rellene todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
+						
+					}else {
+						VentanaCargar ventanaCargar = new VentanaCargar();
+						ventanaCargar.setVisible(true);
+						
+						this.dispose(); //cierra la ventana	
+					}
+	
 				});
 				
 		//BOTÓN CANCELAR:
