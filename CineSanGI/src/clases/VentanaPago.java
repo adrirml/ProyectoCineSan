@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -117,6 +118,7 @@ public class VentanaPago extends JFrame {
 		
 		
 		//BOTÓN ATRÁS:
+		//vuelve a la ventana principal:
 				botonAtras.addActionListener(e -> {
 						
 			        	VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
@@ -125,6 +127,20 @@ public class VentanaPago extends JFrame {
 					});
 				
 		
+		//BOTÓN CONFIRMAR:
+		//ventana cargar con ruleta
+				botonConfirmar.addActionListener(e -> {
+					
+					VentanaCargar ventanaCargar = new VentanaCargar();
+					ventanaCargar.setVisible(true);
+					
+					this.dispose(); //cierra la ventana				
+					
+				});
+				
+		//BOTÓN CANCELAR:
+		//cierra la ventana:
+				
 		
 		//añadimos paneles a la ventana:
 		add(panelDatos, BorderLayout.EAST);
