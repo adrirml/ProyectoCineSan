@@ -34,6 +34,12 @@ public class VentanaInicioSesion extends JFrame {
         
         // Botón de inicio de sesión
         JButton loginButton = new JButton("Iniciar Sesión");
+        JButton anteriorButton = new JButton("Anterior");
+        anteriorButton.addActionListener(e -> {
+			VentanaPrincipal ventanaprincipal = new VentanaPrincipal();
+			ventanaprincipal.setVisible(true);
+			this.dispose(); //se cierra esta ventana
+		});
         loginButton.addActionListener(e -> {
         	
         });
@@ -53,7 +59,7 @@ public class VentanaInicioSesion extends JFrame {
         componentesContra.add(contraLabel);
         componentesContra.add(contra);
         
-        
+        panelBoton.add(anteriorButton);
         panelBoton.add(loginButton);
         
         
