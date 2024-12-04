@@ -1,6 +1,7 @@
 package clases;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -15,7 +16,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class VentanaSeleccionHorario extends JFrame {
-	 private JRadioButton hora1;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JRadioButton hora1;
 	 private JRadioButton hora2;
 	 private JRadioButton hora3;
 	 private JRadioButton hora4;
@@ -29,6 +34,15 @@ public class VentanaSeleccionHorario extends JFrame {
 	 private JRadioButton diaDomingo;
 
 	 private ArrayList<Integer> asientosSeleccionados = new ArrayList<Integer>();
+	 
+	 
+	 
+	 // atributos para las sesiones 
+	 private Sesion sesion;
+	 private ArrayList<Sesion> listaSesiones;
+	 private JPanel panelAsientos;
+	 
+	 
 	 
 	public VentanaSeleccionHorario(String tituloPelicula) {
 		setTitle("Compra de Entradas");
@@ -107,22 +121,27 @@ public class VentanaSeleccionHorario extends JFrame {
         panelSeleccion.add(panelHorarios); 
         
         add(panelSeleccion, BorderLayout.NORTH);
-
+        
+      //inicializar la lista
+      	listaSesiones = new ArrayList<Sesion>(); 
+      	
+      		
+        //listeners de los radiobuttons
+     	registrarListeners();
+        
+        
         // BOTÓN DE CONFIRMAR
         JButton confirmarButton = new JButton("Confirmar");
-        //confirmarButton.addActionListener(e -> mostrarSeleccion());
         add(confirmarButton, BorderLayout.SOUTH);
         confirmarButton.addActionListener(e -> {
         	if(mostrarSeleccion()== true) {
-        		
+        		for(int num : asientosSeleccionados) {
+        			sesion.reservarAsiento(num);
+        		}
         		VentanaSiguiente ventanaSiguiente = new VentanaSiguiente();
         		ventanaSiguiente.setVisible(true);
         		this.dispose();
         		
-        		
-        		
-        		//VentanaPago ventanaPago = new VentanaPago();
-            	//ventanaPago.setVisible(true);
         	}
         	
         });
@@ -151,7 +170,7 @@ public class VentanaSeleccionHorario extends JFrame {
       	salacine.add(pantallaPanel, BorderLayout.NORTH);
       		
       	//creamos el panel donde vamos a colocar los asientos
-      	JPanel panelAsientos = new JPanel();
+      	panelAsientos = new JPanel();
       	panelAsientos.setBackground(Color.DARK_GRAY);
       	panelAsientos.setLayout(new GridLayout(11,10));
       		
@@ -173,10 +192,11 @@ public class VentanaSeleccionHorario extends JFrame {
       		boton.addActionListener(e -> {
       			if(boton.getBackground() == Color.GREEN) {        //clickar para ocupar asiento
       				boton.setBackground(Color.RED);
-      				asientosSeleccionados.add(num);				//añadimos a la lista
+      				asientosSeleccionados.add(Integer.parseInt(boton.getText())); //añadimos a la lista el numero del boton
+      				//como el text es sting lo parseamos 
       			}else {
       				boton.setBackground(Color.GREEN);	// si lo vuelves a clickar se queda libre
-      				asientosSeleccionados.remove(num);	//lo quitamos de la lista
+      				asientosSeleccionados.remove(Integer.parseInt(boton.getText()));	//lo quitamos de la lista
       			}
       				
       				
@@ -190,10 +210,78 @@ public class VentanaSeleccionHorario extends JFrame {
       	salacine.add(panelAsientos, BorderLayout.CENTER);
       		
      	getContentPane().add(salacine, BorderLayout.CENTER);
-      		 
+      	
+     	
       		 
     }
+	
+	
+	//crear sesiones diferentes
+	private void inicializarSesion(String dia, String hora) { 
+		for (Sesion s : listaSesiones) {
+			if (s.getDia().equals(dia) && s.getHora().equals(hora)) { 
+				sesion = s; 
+				return;
+				}
+			}
+		sesion = new Sesion(dia, hora); 
+		listaSesiones.add(sesion); 
+		
+	}
+	
+	//actualizar los colores de los asientos 
+	private void actualizarAsientos() { 
+		for (Component comp : panelAsientos.getComponents()) { 
+			if (comp instanceof JButton) { 
+				JButton boton = (JButton) comp;
+				int num = Integer.parseInt(boton.getText());
+				boton.setBackground(sesion.isAsientoOcupado(num) ? Color.RED : Color.GREEN); 
+				boton.setEnabled(!sesion.isAsientoOcupado(num)); } 
+			}
+	}
 
+	
+	// Obtener día seleccionado 
+	private String getDiaSeleccionado() { 
+		if (diaLunes.isSelected()) return "Lunes"; 
+		if (diaMartes.isSelected()) return "Martes";
+		if (diaMiercoles.isSelected()) return "Miércoles"; 
+		if (diaJueves.isSelected()) return "Jueves"; 
+		if (diaViernes.isSelected()) return "Viernes";
+		if (diaSabado.isSelected()) return "Sábado"; 
+		if (diaDomingo.isSelected()) return "Domingo"; 
+		return null; 
+		
+	}
+	
+	
+	
+	// Registrar listeners para los botones de horario
+	private void registrarListeners() { 
+		ActionListener actionListener = e -> { 
+			JRadioButton boton = (JRadioButton) e.getSource();
+			inicializarSesion(getDiaSeleccionado(), boton.getText()); 
+			actualizarAsientos(); 
+			}; 
+			
+			hora1.addActionListener(actionListener);
+			hora2.addActionListener(actionListener); 
+			hora3.addActionListener(actionListener); 
+			hora4.addActionListener(actionListener);
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//MENSAJE
     private boolean mostrarSeleccion() {
         String diaSeleccionado = "No se ha seleccionado ningún día.";
@@ -229,7 +317,7 @@ public class VentanaSeleccionHorario extends JFrame {
         if(!asientosSeleccionados.isEmpty()) {
         	asientos = "Asiento(s) seleccionado(s): " + asientosSeleccionados;
         }
-        
+      
         
         if (diaSeleccionado.equals("No se ha seleccionado ningún día.") || 
         		horaSeleccionada.equals("No se ha seleccionado ninguna hora.") || 
@@ -254,7 +342,6 @@ public class VentanaSeleccionHorario extends JFrame {
         }
         
         
-
     }    
 
 }
