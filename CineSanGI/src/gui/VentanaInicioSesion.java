@@ -41,7 +41,11 @@ public class VentanaInicioSesion extends JFrame {
 			this.dispose(); //se cierra esta ventana
 		});
         loginButton.addActionListener(e -> {
-        	
+        	mostrarMensaje();
+        	VentanaCarrito carrito = new VentanaCarrito();
+        	carrito.setVisible(true);
+        	this.dispose();
+        
         });
      
         
@@ -70,6 +74,25 @@ public class VentanaInicioSesion extends JFrame {
         
         
     }
+    
+    private void mostrarMensaje() {
+		 
+   	   String usuarios = usuario.getText();
+   	   if(usuario.getText().isEmpty()) {
+   		   usuarios = "Por favor introduzca su usuario";
+   	   }
+   	   
+   	
+   	   
+   	   String contraseña = contra.getText();
+   	   if(contra.getText().isEmpty()) {
+   		   contraseña = "Por favor introduzca su contraseña";
+   	   }
+   	   
+   	   String mensaje = usuarios + "\n" + contraseña ;
+   	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
+      }
+ 	 
 
     public static void main(String[] args) {
         

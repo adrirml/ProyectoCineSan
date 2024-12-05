@@ -8,6 +8,7 @@ public class Sesion {
     private String dia;
     private String hora;
     private Map<Integer, Boolean> asientos;
+    private String titulopelicula;
 
     public Sesion(String dia, String hora) {
         this.dia = dia;

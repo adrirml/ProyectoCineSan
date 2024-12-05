@@ -34,6 +34,7 @@ public class VentanaSeleccionHorario extends JFrame {
 	 private JRadioButton diaViernes; 
 	 private JRadioButton diaSabado;
 	 private JRadioButton diaDomingo;
+	 private String tituloPelicula;
 
 	 private ArrayList<Integer> asientosSeleccionados = new ArrayList<Integer>();
 	 
@@ -219,7 +220,7 @@ public class VentanaSeleccionHorario extends JFrame {
 	
 	
 	//crear sesiones diferentes
-	private void inicializarSesion(String dia, String hora) { 
+	private void inicializarSesion(String dia, String hora, String tituloPelicula) { 
 		for (Sesion s : listaSesiones) {
 			if (s.getDia().equals(dia) && s.getHora().equals(hora)) { 
 				sesion = s; 
@@ -262,7 +263,7 @@ public class VentanaSeleccionHorario extends JFrame {
 	private void registrarListeners() { 
 		ActionListener actionListener = e -> { 
 			JRadioButton boton = (JRadioButton) e.getSource();
-			inicializarSesion(getDiaSeleccionado(), boton.getText()); 
+			inicializarSesion(getDiaSeleccionado(), boton.getText(), tituloPelicula); 
 			actualizarAsientos(); 
 			}; 
 			
