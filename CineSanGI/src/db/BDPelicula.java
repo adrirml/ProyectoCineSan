@@ -1,4 +1,4 @@
-package clases;
+package db;
 
 import java.beans.Statement;
 import java.sql.Connection;
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import domain.Pelicula;
 
 public class BDPelicula {
     private static BDPelicula instance;

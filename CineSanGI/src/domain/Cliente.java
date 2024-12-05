@@ -1,4 +1,4 @@
-package clases;
+package domain;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class Cliente {
 		Contraseña = contraseña;
 		this.reservas = reservas;
 	}
+	
 
 	public String getNombre() {
 		return Nombre;

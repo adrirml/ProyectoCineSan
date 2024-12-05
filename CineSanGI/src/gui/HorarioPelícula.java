@@ -1,7 +1,9 @@
-package clases;
+package gui;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import domain.Pelicula;
 public class HorarioPelícula {
 	private Pelicula pelicula;
 	private Map<Integer, List<Integer>> horariosPorDia;

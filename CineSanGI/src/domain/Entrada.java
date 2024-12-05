@@ -1,4 +1,4 @@
-package clases;
+package domain;
 
 public class Entrada {
 

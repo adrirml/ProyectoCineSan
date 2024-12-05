@@ -1,4 +1,4 @@
-package clases;
+package gui;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -14,6 +14,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import domain.Sesion;
 
 public class VentanaSeleccionHorario extends JFrame {
 	 /**
