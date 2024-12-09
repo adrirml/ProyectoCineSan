@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import domain.Cliente;
+
 public class VentanaPrincipal extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
@@ -83,8 +85,8 @@ public class VentanaPrincipal extends JFrame{
 	      	        
 	        //COMPRAR ENTRADAS:
 	        botonEntradas.addActionListener(e ->{
-	        	
-	        	 VentanaComprarEntradas ventanaCompra = new VentanaComprarEntradas();
+	    		Cliente cliente = new Cliente("Nombre","Apellido",30,"email@ejemplo.com","contraseña",null);
+	        	 VentanaComprarEntradas ventanaCompra = new VentanaComprarEntradas(cliente);
 		         ventanaCompra.setVisible(true);
 		         this.dispose(); //cerramos la ventana y pasamos a la siguiente
 	        		     

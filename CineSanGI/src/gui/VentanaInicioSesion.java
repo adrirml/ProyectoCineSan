@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+
+import domain.Cliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,11 +12,9 @@ public class VentanaInicioSesion extends JFrame {
 
     private JTextField usuario;
     private JPasswordField contra;
-
+    
     public VentanaInicioSesion() {
-    	
-    	
-       
+    
         setTitle("Inicio de Sesión");
         setSize(250, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +43,9 @@ public class VentanaInicioSesion extends JFrame {
 		});
         loginButton.addActionListener(e -> {
         	mostrarMensaje();
-        	VentanaCarrito carrito = new VentanaCarrito();
+        	//TODO
+        	Cliente cliente = new Cliente(usuario.getText(),"",0,"",String.valueOf(contra.getPassword()),null);
+        	VentanaCarrito carrito = new VentanaCarrito(cliente);
         	carrito.setVisible(true);
         	this.dispose();
         
@@ -74,6 +77,7 @@ public class VentanaInicioSesion extends JFrame {
         
         
     }
+    
     
     private void mostrarMensaje() {
 		 

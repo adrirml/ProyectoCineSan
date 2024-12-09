@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
@@ -19,7 +20,7 @@ public class Cliente {
 		Edad = edad;
 		Correoelectronico = correoelectronico;
 		Contraseña = contraseña;
-		this.reservas = reservas;
+		this.reservas = new ArrayList<>();
 	}
 	
 
@@ -72,4 +73,8 @@ public class Cliente {
 	}
 	
 	
+	//metodo para agregar reservas a la lista de reservas 
+	public void agregarReserva(Reserva reserva) {
+		this.reservas.add(reserva);
+	}
 }

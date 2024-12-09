@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import domain.Cliente;
+
 public class VentanaPago extends JFrame {
 	
 	private JPanel panelDatos;
@@ -177,6 +179,8 @@ public class VentanaPago extends JFrame {
 	}
 	
 	public static void main(String[] args) {
+		//TODO
+		Cliente cliente = new Cliente("Nombre","Apellido",30,"email@ejemplo.com","contraseña",null);
 		VentanaPago ventana = new VentanaPago();
 		ventana.setVisible(true);
 	}
