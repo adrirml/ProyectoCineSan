@@ -43,7 +43,10 @@ public class VentanaInicioSesion extends JFrame {
 		});
         loginButton.addActionListener(e -> {
         	mostrarMensaje();
-        	//TODO
+        	//TODO verificar los datos en la base de datos 
+        	
+        	//si son validas cargar los datos 
+        
         	Cliente cliente = new Cliente(usuario.getText(),"",0,"",String.valueOf(contra.getPassword()),null);
         	VentanaCarrito carrito = new VentanaCarrito(cliente);
         	carrito.setVisible(true);

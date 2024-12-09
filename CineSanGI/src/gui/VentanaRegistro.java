@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import domain.Cliente;
+
 import java.awt.event.*;
 
 public class VentanaRegistro extends JFrame {
@@ -33,6 +36,7 @@ public class VentanaRegistro extends JFrame {
 	private JRadioButton edadMenor60;
 	private JRadioButton edadMas60;
 	private JTextField correoClte;
+	private JPasswordField contrasenya; 
 	
 	// constructor
 	public VentanaRegistro() {
@@ -88,7 +92,7 @@ public class VentanaRegistro extends JFrame {
         // Panel para la contraseña
         JPanel panelContra = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
         JLabel lblContra = new JLabel("Contraseña: ");
-        JPasswordField contrasenya = new JPasswordField(15);
+        contrasenya = new JPasswordField(15);
         
         //Añadir paneles de entrada de datos al panel de botones
         panelBotones.add(panelNombreClte);
@@ -134,6 +138,7 @@ public class VentanaRegistro extends JFrame {
 		//Botón siguiente:
 		siguiente.addActionListener(e -> { 
 		mostrarMensaje();
+		registrarCliente();
 		VentanaPrincipal ventana = new VentanaPrincipal();
 		ventana.setVisible(true);
 		this.dispose();
@@ -185,4 +190,23 @@ public class VentanaRegistro extends JFrame {
   	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
      }
 	 
+	 public void registrarCliente() {
+		 
+		 String nombre = nombreClte.getText();
+		 String apellido = "";
+		 Integer edadnum = Integer.parseInt(edad); 
+		 String correo = correoClte.getText();
+		 String password = new String(contrasenya.getPassword());
+		 
+		 
+		 //crear cliente
+		 Cliente cliente = new Cliente(nombre,apellido,edadnum,correo,password,null);
+		 
+		 //TODO aqui abria que guardarlo en la base de datos 
+		 
+		 VentanaComprarEntradas ventanacompra = new VentanaComprarEntradas(cliente);
+		 ventanacompra.setVisible(true);
+		 this.dispose();
+	 }
+
 }

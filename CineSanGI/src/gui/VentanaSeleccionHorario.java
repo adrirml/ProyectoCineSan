@@ -196,7 +196,8 @@ public class VentanaSeleccionHorario extends JFrame {
       			if(boton.getBackground() == Color.GREEN) {        //clickar para ocupar asiento
       				boton.setBackground(Color.RED);
       				asientosSeleccionados.add(Integer.parseInt(boton.getText())); //añadimos a la lista el numero del boton
-      				//como el text es sting lo parseamos 
+      				//como el text es string lo parseamos 
+      				
       			}else {
       				boton.setBackground(Color.GREEN);	// si lo vuelves a clickar se queda libre
       				asientosSeleccionados.remove(Integer.parseInt(boton.getText()));	//lo quitamos de la lista

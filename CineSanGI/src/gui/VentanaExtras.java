@@ -20,6 +20,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import domain.Cliente;
+
 import javax.swing.*;
 
 
@@ -27,8 +30,13 @@ public class VentanaExtras extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	private Cliente cliente; 
+	
 	@SuppressWarnings("unlikely-arg-type")
 	public VentanaExtras() {
+		
+		
+		
 		//Carga de fotos
 		URL palomitasURL = getClass().getResource("/images/palomitas.png");
         URL bebidaURL = getClass().getResource("/images/bebida.png"); // 
@@ -252,7 +260,6 @@ public class VentanaExtras extends JFrame {
         
         finalizarCompra.addActionListener(e -> {
         	int resultado = JOptionPane.showConfirmDialog(null, "¿Deseas finalizar la compra?","Confirmacion",JOptionPane.OK_CANCEL_OPTION);
-        	
         	
         	if(resultado == JOptionPane.OK_OPTION) {
         		VentanaPago ventanapago = new VentanaPago();
