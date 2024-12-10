@@ -42,6 +42,7 @@ public class VentanaPago extends JFrame {
 	private JComboBox<String> comboAnyo;
 	
 	
+	
 	public VentanaPago() {
 		setTitle("Pago");
 		setSize(950,500);
