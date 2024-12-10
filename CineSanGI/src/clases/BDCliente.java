@@ -57,7 +57,7 @@ public class BDCliente {
                 
                 
 
-                Cliente cliente = new Cliente(nombre, edad, correoElectronico, contraseña, reservas);
+                Cliente cliente = new Cliente(nombre, apellido, edad, correoElectronico, contraseña, reservas);
                 clientes.add(cliente);
             }
 
@@ -120,7 +120,7 @@ public class BDCliente {
                         stmtUpdate.setInt(3, cliente.getEdad());
                         stmtUpdate.setString(4, cliente.getCorreoelectronico());
                         stmtUpdate.setString(5, cliente.getContraseña());
-                        stmtUpdate.setArray(6, cliente.getReservas().toArray());
+                        stmtUpdate.setList(6, cliente.getReservas());
 
                         
 
