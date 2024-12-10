@@ -66,7 +66,7 @@ public class VentanaRegistro extends JFrame {
         
         // Panel para el nombre
         JPanel panelNombreClte = new JPanel(new FlowLayout(FlowLayout.LEFT,5,5));
-        JLabel lblNombre = new JLabel("Nombre: ");
+        JLabel lblNombre = new JLabel("Nombre usuario: ");
         nombreClte = new JTextField(10);
         
         // Panel para la edad
@@ -200,7 +200,7 @@ public class VentanaRegistro extends JFrame {
 		 
 		 
 		 //crear cliente
-		 Cliente cliente = new Cliente(nombre,apellido,edadnum,correo,password);
+		 Cliente cliente = new Cliente(nombre,edadnum,correo,password);
 		 
 		 //TODO aqui abria que guardarlo en la base de datos 
 		 

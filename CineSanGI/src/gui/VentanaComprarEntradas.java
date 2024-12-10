@@ -158,7 +158,7 @@ public class VentanaComprarEntradas extends JFrame{
 	
 	public static void main(String[] args) {
 		//TODO 
-		Cliente cliente = new Cliente("Nombre","Apellido","30", "email@ejemplo.com" ,"contraseña",null);
+		Cliente cliente = new Cliente("Nombre","30","email@ejemplo.com" ,"contraseña",null);
 		VentanaComprarEntradas ventana = new VentanaComprarEntradas(cliente);
 		ventana.setVisible(true);
 	}

@@ -180,7 +180,7 @@ public class VentanaPago extends JFrame {
 	
 	public static void main(String[] args) {
 		//TODO
-		Cliente cliente = new Cliente("Nombre","Apellido","30","email@ejemplo.com","contraseña",null);
+		Cliente cliente = new Cliente("Nombre","30","email@ejemplo.com","contraseña",null);
 		VentanaPago ventana = new VentanaPago();
 		ventana.setVisible(true);
 	}
