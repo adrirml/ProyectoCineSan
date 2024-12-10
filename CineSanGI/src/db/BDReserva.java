@@ -104,13 +104,12 @@ public class BDReserva {
             stmtUpdate = conn.prepareStatement(actualizarReserva);
             stmtInsert = conn.prepareStatement(agregarNuevaReserva);
 
-            // Conjunto para almacenar todos los IDs proporcionados
             Set<String> nombresdados = new HashSet<>();
 
             for (Reserva reserva: reservas) {
             	nombresdados.add(reserva.getPelicula());
 
-                // Verificar si la película ya existe
+                // Verificar si la reserva ya existe
                 stmtCheck.setString(1, reserva.getPelicula());
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {

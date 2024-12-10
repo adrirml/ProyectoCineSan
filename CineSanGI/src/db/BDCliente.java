@@ -114,13 +114,12 @@ public class BDCliente {
             stmtDelete = conn.prepareStatement(eliminarReservasCliente);
 
 
-            // Conjunto para almacenar todos los IDs proporcionados
             Set<String> nombresdados = new HashSet<>();
 
             for (Cliente cliente: clientes) {
             	nombresdados.add(cliente.getNombre());
 
-                // Verificar si la película ya existe
+                // Verificar si el cliente ya existe
                 stmtCheck.setString(1, cliente.getNombre());
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {

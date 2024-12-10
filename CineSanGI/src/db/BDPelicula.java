@@ -101,7 +101,6 @@ public class BDPelicula {
             stmtUpdate = conn.prepareStatement(actualizarPelicula);
             stmtInsert = conn.prepareStatement(agregarNuevaPelicula);
 
-            // Conjunto para almacenar todos los IDs proporcionados
             Set<String> titulosDados = new HashSet<>();
 
             for (Pelicula pelicula : peliculas) {

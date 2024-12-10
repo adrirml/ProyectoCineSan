@@ -7,3 +7,17 @@ Prompt: Establecer la conexión
 
 Prompt: Deshabilitar auto-commit para manejar transacciones manualmente
 		conn.setAutoCommit(false);
+		
+
+Prompt: como contener la informacion que salio mal, cuando da error
+	catch (SQLException e) {
+	            e.printStackTrace();
+	            if (conn != null) {
+	                try {
+	                    conn.rollback();
+	                    System.out.println("Transacción revertida debido a un error.");
+	                } catch (SQLException rollbackEx) {
+	                    rollbackEx.printStackTrace();
+	                    System.out.println("Error al realizar el rollback.");
+	                }
+	            }
