@@ -6,27 +6,24 @@ import java.util.List;
 public class Cliente {
 
 	private String Nombre;
-	private String Edad;
+	private String Apellido;
+	private Integer Edad;
 	private String Correoelectronico;
 	private String Contraseña;
 	private List <Reserva> reservas;
 	
-	public Cliente(String nombre, String edad, String correoelectronico, String contraseña,
+	public Cliente(String nombre, String apellido, Integer edad, String correoelectronico, String contraseña,
 			List<Reserva> reservas) {
 		super();
 		Nombre = nombre;
+		Apellido = apellido;
 		Edad = edad;
 		Correoelectronico = correoelectronico;
 		Contraseña = contraseña;
 		this.reservas = new ArrayList<>();
 	}
 	
-	public Cliente(String nombre, String edadnum, String correoelectronico, String contraseña) {
-		Nombre = nombre;
-		Edad = edadnum;
-		Correoelectronico = correoelectronico;
-		Contraseña = contraseña;
-	}
+
 	public String getNombre() {
 		return Nombre;
 	}
@@ -35,11 +32,19 @@ public class Cliente {
 		Nombre = nombre;
 	}
 
-	public String getEdad() {
+	public String getApellido() {
+		return Apellido;
+	}
+
+	public void setApellido(String apellido) {
+		Apellido = apellido;
+	}
+
+	public Integer getEdad() {
 		return Edad;
 	}
 
-	public void setEdad(String edad) {
+	public void setEdad(Integer edad) {
 		Edad = edad;
 	}
 
