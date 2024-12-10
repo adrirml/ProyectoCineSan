@@ -3,7 +3,6 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
 
 import domain.Pelicula;
 
@@ -30,14 +29,14 @@ public class VentanaComprarEntradas extends JFrame{
 	    //Inicializar la lista de peliculas
 	    inicializarPeliculas();
 	    //Paneles
-	    JPanel panelSur = new JPanel();
+	    panelSur = new JPanel();
 	    JPanel panelTitulo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	    JLabel labelPelis = new JLabel("PELICULAS");
 
 	  	JPanel panelbotones = new JPanel(); 
 	  	
 	  	//Inicializar el boton de salir 
-	    JButton salir = new JButton("Salir");
+	    salir = new JButton("Salir");
 	    
 	    JTextField filtroTitulo = new JTextField(15);
 	    JTextField filtroAnyo = new JTextField(4);
@@ -60,7 +59,10 @@ public class VentanaComprarEntradas extends JFrame{
 
 		//Inicializar el boton de volver atras y añadirlo al panel sur 
 		volveratras = new JButton("Anterior");
+		panelSur.setLayout(new BoxLayout(panelSur, BoxLayout.Y_AXIS));
 		panelSur.add(volveratras); 
+		panelSur.add(panelBusqueda);
+		panelSur.add(salir);
 		
 		//Action listener del boton de volver a la pagina anterior 
 		volveratras.addActionListener(e -> {
@@ -208,39 +210,4 @@ public class VentanaComprarEntradas extends JFrame{
 }
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
