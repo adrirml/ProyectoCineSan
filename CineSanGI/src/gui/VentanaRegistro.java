@@ -139,8 +139,7 @@ public class VentanaRegistro extends JFrame {
 		siguiente.addActionListener(e -> { 
 		mostrarMensaje();
 		registrarCliente();
-		VentanaPrincipal ventana = new VentanaPrincipal();
-		ventana.setVisible(true);
+		
 		this.dispose();
 		
 		});

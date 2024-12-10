@@ -29,7 +29,7 @@ public class VentanaPrincipal extends JFrame{
 	
 	public VentanaPrincipal() {
 	        setTitle("Gestión de CineSan");
-	        setSize(900, 500);
+	        setSize(1000, 600);
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setLayout(new BorderLayout());
 	                
