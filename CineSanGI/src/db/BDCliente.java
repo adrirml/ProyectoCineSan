@@ -38,7 +38,6 @@ public class BDCliente {
 
             conn = DriverManager.getConnection(url, user, password);
             
-
             // Crear una declaración
             stmt = conn.createStatement();
 
@@ -54,7 +53,7 @@ public class BDCliente {
                 String correoElectronico = rs.getString("correoelectronico");
                 String contraseña = rs.getString("contraseña");
                 
-                Reserva[] reservasArray = BDReserva.obtenerReservas(nombre); // Método que devuelve un array
+                Reserva[] reservasArray = BDReserva.obtenerReservas(nombre); 
                 List<Reserva> reservas = new ArrayList<>();
                 if (reservasArray != null) {
                     for (Reserva reserva : reservasArray) {
@@ -85,9 +84,9 @@ public class BDCliente {
     }
 
     public void guardarTodosLosClientes(Cliente[] clientes) {
-        String url = "";
-        String user = "";
-        String password = "";
+    	String url = "jdbc:mysql://localhost:3306/CineSan";
+        String user = "CineSan";
+        String password = "Contraseña";
 
         String comprobarSiClienteYaExiste = "SELECT 1 FROM clientes WHERE nombre = ?";
         String actualizarCliente = "UPDATE clientes SET apellido = ?, edad = ?, correoelectronico = ?, contraseña = ? WHERE nombre = ?";
@@ -115,13 +114,12 @@ public class BDCliente {
             stmtDelete = conn.prepareStatement(eliminarReservasCliente);
 
 
-            // Conjunto para almacenar todos los IDs proporcionados
             Set<String> nombresdados = new HashSet<>();
 
             for (Cliente cliente: clientes) {
             	nombresdados.add(cliente.getNombre());
 
-                // Verificar si la película ya existe
+                // Verificar si el cliente ya existe
                 stmtCheck.setString(1, cliente.getNombre());
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {
@@ -150,7 +148,7 @@ public class BDCliente {
                     }
                     // Insertar reservas del cliente
                     for (Reserva reserva : cliente.getReservas()) {
-                    	stmtInsert.setString(1, cliente.getNombre()); // Supongamos que se usa el nombre como ID
+                    	stmtInsert.setString(1, cliente.getNombre()); 
                     	stmtInsert.setString(2, reserva.getHorario()); 
                     	stmtInsert.setString(3, reserva.getPalommitas()); 
                     	stmtInsert.setString(4, reserva.getBebidas()); 
