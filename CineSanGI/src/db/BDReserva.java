@@ -78,9 +78,9 @@ public class BDReserva {
 
 
     public void guardarReservas(Reserva[] reservas) {
-        String url = "";
-        String user = "";
-        String password = "";
+    	String url = "jdbc:mysql://localhost:3306/CineSan";
+        String user = "CineSan";
+        String password = "Contraseña";
 
         String comprobarSiReservaYaExiste = "SELECT 1 FROM reservas WHERE pelicula = ?";
         String actualizarReserva = "UPDATE clientes SET horario = ?, palomitas = ?, bebidas = ?, chuches = ? , alzadores = ?, precio = ? WHERE pelicula = ?";

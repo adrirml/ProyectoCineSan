@@ -1,0 +1,14 @@
+
+BDCliente: obtenerTodosLosCllientes(
+ 	List<Reserva> reservas = List.of(BDReserva.obtenerReservas(nombre)));
+
+
+
+
+ // Establecer la conexión
+		conn = DriverManager.getConnection(url, user, password);
+// Deshabilitar auto-commit para manejar transacciones manualmente
+		conn.setAutoCommit(false);
+ 	
+ 	
+ 	

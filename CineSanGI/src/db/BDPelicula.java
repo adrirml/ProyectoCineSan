@@ -74,9 +74,10 @@ public class BDPelicula {
     }
 
     public void guardarTodasLasPeliculas(Pelicula[] peliculas) {
-        String url = "";
-        String user = "";
-        String password = "";
+    	String url = "jdbc:mysql://localhost:3306/CineSan";
+        String user = "CineSan";
+        String password = "Contraseña";
+
 
         String comprobarSiPeliculaYaExiste = "SELECT 1 FROM peliculas WHERE titulo = ?";
         String actualizarPelicula = "UPDATE peliculas SET director = ?, anyoEstreno = ?, edadRecomendada = ?, logoPath = ? WHERE titulo = ?";
