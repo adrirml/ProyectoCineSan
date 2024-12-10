@@ -1,0 +1,9 @@
+
+Prompt: Guardar una lista para la base de datos
+	List<Reserva> reservas = List.of(BDReserva.obtenerReservas(nombre)));
+
+Prompt: Establecer la conexión
+	conn = DriverManager.getConnection(url, user, password);
+
+Prompt: Deshabilitar auto-commit para manejar transacciones manualmente
+		conn.setAutoCommit(false);
