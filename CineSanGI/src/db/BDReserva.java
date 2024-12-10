@@ -1,4 +1,4 @@
-package clases;
+package db;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -33,13 +33,11 @@ public class BDReserva {
 
         try {
             // Establecer la conexión
-            String url = "";
-            String user = "";
-            String password = "";
+        	String url = "jdbc:mysql://localhost:3306/CineSan";
+            String user = "CineSan";
+            String password = "Contraseña";
 
             conn = DriverManager.getConnection(url, user, password);
-            
-           
 
             // Crear una declaración
             stmt = conn.prepareStatement("SELECT * FROM reservas where nombre=?");
@@ -79,7 +77,7 @@ public class BDReserva {
     }
 
 
-    public void guardarTodasLasReservas(Reserva[] reserva) {
+    public void guardarReservas(Reserva[] reservas) {
         String url = "";
         String user = "";
         String password = "";

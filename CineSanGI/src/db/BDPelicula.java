@@ -31,7 +31,7 @@ public class BDPelicula {
 
         try {
             // Establecer la conexión
-            String url = "CineSan";
+            String url = "jdbc:mysql://localhost:3306/CineSan";
             String user = "CineSan";
             String password = "Contraseña";
 

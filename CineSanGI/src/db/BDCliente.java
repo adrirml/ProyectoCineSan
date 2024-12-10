@@ -1,4 +1,4 @@
-package clases;
+package db;
 
 import java.sql.Statement;
 import java.sql.Connection;
@@ -32,9 +32,9 @@ public class BDCliente {
 
         try {
             // Establecer la conexión
-            String url = "";
-            String user = "";
-            String password = "";
+        	String url = "jdbc:mysql://localhost:3306/CineSan";
+            String user = "CineSan";
+            String password = "Contraseña";
 
             conn = DriverManager.getConnection(url, user, password);
             
@@ -53,12 +53,18 @@ public class BDCliente {
                 int edad = rs.getInt("edad");
                 String correoElectronico = rs.getString("correoelectronico");
                 String contraseña = rs.getString("contraseña");
-                List<Reserva> reservas = BDReserva.obtenerReservas(nombre);  
                 
+                Reserva[] reservasArray = BDReserva.obtenerReservas(nombre); // Método que devuelve un array
+                List<Reserva> reservas = new ArrayList<>();
+                if (reservasArray != null) {
+                    for (Reserva reserva : reservasArray) {
+                        reservas.add(reserva);
+                    }                
                 
 
                 Cliente cliente = new Cliente(nombre, apellido, edad, correoElectronico, contraseña, reservas);
                 clientes.add(cliente);
+                }
             }
 
         } catch (SQLException e) {
@@ -86,6 +92,8 @@ public class BDCliente {
         String actualizarCliente = "UPDATE clientes SET apellido = ?, edad = ?, correoelectronico = ?, contraseña = ? WHERE nombre = ?";
         String agregarNuevaCliente = "INSERT INTO clientes (nombre, apellido , edad, correoelectronico, contraseña) VALUES (?, ?, ?, ?, ?)";
         String eliminarClientesObsoletas = "DELETE FROM clientes WHERE nombre NOT IN (%s)";
+        String insertarReserva = "INSERT INTO reservas (pelicula, detalles) VALUES (?, ?)";
+        String eliminarReservasCliente = "DELETE FROM reservas WHERE pelicula = ?";
 
         Connection conn = null;
         PreparedStatement stmtCheck = null;
@@ -103,6 +111,8 @@ public class BDCliente {
             stmtCheck = conn.prepareStatement(comprobarSiClienteYaExiste);
             stmtUpdate = conn.prepareStatement(actualizarCliente);
             stmtInsert = conn.prepareStatement(agregarNuevaCliente);
+            stmtDelete = conn.prepareStatement(eliminarReservasCliente);
+
 
             // Conjunto para almacenar todos los IDs proporcionados
             Set<String> nombresdados = new HashSet<>();
@@ -120,8 +130,11 @@ public class BDCliente {
                         stmtUpdate.setInt(3, cliente.getEdad());
                         stmtUpdate.setString(4, cliente.getCorreoelectronico());
                         stmtUpdate.setString(5, cliente.getContraseña());
-                        stmtUpdate.setList(6, cliente.getReservas());
+                        stmtUpdate.executeUpdate();
 
+                        // Eliminar reservas existentes del cliente
+                        stmtDelete.setString(1, cliente.getNombre());
+                        stmtDelete.executeUpdate();
                         
 
                         stmtUpdate.executeUpdate();
@@ -132,10 +145,21 @@ public class BDCliente {
                         stmtInsert.setInt(3, cliente.getEdad());
                         stmtInsert.setString(4, cliente.getCorreoelectronico());
                         stmtInsert.setString(5, cliente.getContraseña());
-                        stmtInsert.setList(5, cliente.getReservas());
-
-
                         stmtInsert.executeUpdate();
+
+
+                    }
+                    // Insertar reservas del cliente
+                    for (Reserva reserva : cliente.getReservas()) {
+                    	stmtInsert.setString(1, cliente.getNombre()); // Supongamos que se usa el nombre como ID
+                    	stmtInsert.setString(2, reserva.getHorario()); 
+                    	stmtInsert.setString(3, reserva.getPalommitas()); 
+                    	stmtInsert.setString(4, reserva.getBebidas()); 
+                    	stmtInsert.setBoolean(5, reserva.getChuches()); 
+                    	stmtInsert.setBoolean(6, reserva.getAlzadores()); 
+                    	stmtInsert.setDouble(7, reserva.getPrecio()); 
+
+                    	stmtInsert.executeUpdate();
                     }
                 }
             }
