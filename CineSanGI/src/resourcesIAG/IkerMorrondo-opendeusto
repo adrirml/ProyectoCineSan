@@ -1,0 +1,17 @@
+
+2024-11-8
+Prompt : como hago para que cuando clicke en un asiento se ponga en rojo por que esta ocupado
+
+Respuesta de chat-GPT : Para hacer que un asiento se marque como "ocupado" al hacer clic en él, puedes agregar un ActionListener en 
+cada botón de asiento. Dentro de este listener, puedes cambiar el color del botón a rojo si está disponible (es decir, de color verde),
+indicando que ahora está ocupado. Si el botón ya está en rojo, podrías ignorar el clic, o si prefieres, podrías hacer que vuelva a 
+verde (para simular liberar el asiento).
+
+
+2024-11-9
+
+Prompt: como podria incluir la pantalla de un cine en el esquema de una sala decine en una ventana de java?
+
+Respuesta de chat-GPT : Para incluir la pantalla del cine en la ventana y darle la apariencia de una pantalla ubicada en la parte
+superior del panel de asientos, puedes crear un nuevo JPanel (por ejemplo, llamado panelPrincipal) y agregar tanto el panel de la 
+pantalla como el panel de los asientos a este nuevo panel.
