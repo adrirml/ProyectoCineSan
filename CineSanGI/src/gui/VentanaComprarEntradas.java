@@ -23,6 +23,7 @@ public class VentanaComprarEntradas extends JFrame{
 	public JPanel panelSur;
 	public JButton volveratras; 
 	
+	
 	public VentanaComprarEntradas(Cliente cliente) {
 		
 		this.cliente = cliente; 
@@ -37,6 +38,24 @@ public class VentanaComprarEntradas extends JFrame{
 	  	
 	  	//Inicializar el boton de salir 
 	    JButton salir = new JButton("Salir");
+	    
+	    JTextField filtroTitulo = new JTextField(15);
+	    JTextField filtroAnyo = new JTextField(4);
+	    JTextField filtroEdad = new JTextField(3);
+	    JButton botonBuscar = new JButton("Buscar");
+	    JPanel panelBusqueda = new JPanel();
+	    
+	    
+	    panelBusqueda.setLayout(new FlowLayout());
+	    panelBusqueda.add(new JLabel("Titulo:"));
+	    panelBusqueda.add(filtroTitulo);
+	    panelBusqueda.add(new JLabel("Año:"));
+	    panelBusqueda.add(filtroAnyo);
+	    panelBusqueda.add(new JLabel("Edad Minima:"));
+	    panelBusqueda.add(filtroEdad);
+	    panelBusqueda.add(botonBuscar);
+
+	    
 	    
 
 		//Inicializar el boton de volver atras y añadirlo al panel sur 
@@ -71,24 +90,53 @@ public class VentanaComprarEntradas extends JFrame{
 	    add(scrollPanel,BorderLayout.CENTER);
 	    //Acción Salir
 	    panelSur.add(salir);	
-	    
+	 
 		salir.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
+		panelSur.add(panelBusqueda);
+	    botonBuscar.addActionListener(e-> {
+	    	String titulo = filtroTitulo.getText().trim();
+	    	int anyo = filtroAnyo.getText().isEmpty() ? 0 : Integer.parseInt(filtroAnyo.getText()) ;
+	    	int edad_min = filtroEdad.getText().isEmpty() ? 0 : Integer.parseInt(filtroEdad.getText());
+	    	
+	    	Pelicula encontrada = buscarPelicula(peliculas,titulo,anyo,edad_min,0);
+	    	
+	    	if (encontrada != null) {
+	    		JOptionPane.showMessageDialog(this, "Película encontrada: \n" + encontrada.getTitulo() );
+	    	}else {
+	    		JOptionPane.showMessageDialog(this, "Película no encontrada");
+	    	}
+	    	
+	    });
 		
 		//Posición
 		this.getContentPane().add(panelSur,"South");
 		
 		
-		
+
 		
 		
 				
 		
 	}
+	
+	
+	private Pelicula buscarPelicula(ArrayList<Pelicula> peliculas, String titulo, int año, int edad_min, int index) {
+		if (index >= peliculas.size()){
+			return null;
+		}
+		Pelicula peliculaActual = peliculas.get(index);
+		
+		
+		if (peliculaActual.getTitulo().equalsIgnoreCase(titulo) && (año <= 0 || peliculaActual.getAnyoEstreno() == año) && (edad_min <= 0 || peliculaActual.getEdadRecomendada() <= edad_min)) {
+			return peliculaActual;
+		}
+		return buscarPelicula(peliculas,titulo,año,edad_min, index +1);
+	}	
 	//Array de Películas
 	private void inicializarPeliculas() {
 	    peliculas = new ArrayList<>();
