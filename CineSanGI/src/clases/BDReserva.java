@@ -25,7 +25,7 @@ public class BDReserva {
         return instance;
     }
 
-    public Reserva[] obtenerReservas(String nombre) {
+    public static Reserva[] obtenerReservas(String nombre) {
         List<Reserva> reservas = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -51,7 +51,6 @@ public class BDReserva {
             while (rs.next()) {
                 String pelicula = rs.getString("pelicula");
                 String horario = rs.getString("horario");
-                ArrayList<String> asientos= (ArrayList<String>) rs.getArray("asientos");
                 String palomitas = rs.getString("palomitas");
                 String bebidas = rs.getString("bebidas");
                 Boolean chuches = rs.getBoolean("chuches");
@@ -59,7 +58,7 @@ public class BDReserva {
                 Double precio = rs.getDouble("precio");
 
 
-                Reserva reserva = new Reserva(pelicula, horario, asientos, palomitas, bebidas, chuches, alzadores, precio);
+                Reserva reserva = new Reserva(pelicula, horario, null, palomitas, bebidas, chuches, alzadores, precio);
                 reservas.add(reserva);
             }
 
@@ -85,10 +84,10 @@ public class BDReserva {
         String user = "";
         String password = "";
 
-        String comprobarSiReservaYaExiste = "SELECT 1 FROM clientes WHERE nombre = ?";
-        String actualizarReserva = "UPDATE clientes SET apellido = ?, edad = ?, correoelectronico = ?, contraseña = ? , reservas = ? WHERE nombre = ?";
-        String agregarNuevaReserva = "INSERT INTO clientes (nombre, apellido , edad, correoelectronico, contraseña, reservas) VALUES (?, ?, ?, ?, ?, ?)";
-        String eliminarReservaObsoletas = "DELETE FROM clinetes WHERE nombre NOT IN (%s)";
+        String comprobarSiReservaYaExiste = "SELECT 1 FROM reservas WHERE pelicula = ?";
+        String actualizarReserva = "UPDATE clientes SET horario = ?, palomitas = ?, bebidas = ?, chuches = ? , alzadores = ?, precio = ? WHERE pelicula = ?";
+        String agregarNuevaReserva = "INSERT INTO reservas (pelicula, horario, palomitas, bebidas, chuches, alzadores, precio) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String eliminarReservaObsoletas = "DELETE FROM reservas WHERE pelicula NOT IN (%s)";
 
         Connection conn = null;
         PreparedStatement stmtCheck = null;
@@ -103,40 +102,42 @@ public class BDReserva {
             conn.setAutoCommit(false);
 
             // Preparar las sentencias
-            stmtCheck = conn.prepareStatement(comprobarSiClienteYaExiste);
-            stmtUpdate = conn.prepareStatement(actualizarCliente);
-            stmtInsert = conn.prepareStatement(agregarNuevaCliente);
+            stmtCheck = conn.prepareStatement(comprobarSiReservaYaExiste);
+            stmtUpdate = conn.prepareStatement(actualizarReserva);
+            stmtInsert = conn.prepareStatement(agregarNuevaReserva);
 
             // Conjunto para almacenar todos los IDs proporcionados
             Set<String> nombresdados = new HashSet<>();
 
-            for (Cliente cliente: clientes) {
-            	nombresdados.add(cliente.getNombre());
+            for (Reserva reserva: reservas) {
+            	nombresdados.add(reserva.getPelicula());
 
                 // Verificar si la película ya existe
-                stmtCheck.setString(1, cliente.getNombre());
+                stmtCheck.setString(1, reserva.getPelicula());
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {
                         // EXISTE -> proceder a actualizar
-                        stmtUpdate.setString(1, cliente.getNombre());
-                        stmtUpdate.setString(2, cliente.getApellido());
-                        stmtUpdate.setInt(3, cliente.getEdad());
-                        stmtUpdate.setString(4, cliente.getCorreoelectronico());
-                        stmtUpdate.setString(5, cliente.getContraseña());
-                        stmtUpdate.setArray(6, cliente.getReservas().toArray());
+                        stmtUpdate.setString(1, reserva.getPelicula());
+                        stmtUpdate.setString(2, reserva.getHorario());
+                        stmtUpdate.setString(3, reserva.getPalommitas());
+                        stmtUpdate.setString(4, reserva.getBebidas());
+                        stmtUpdate.setBoolean(5, reserva.getChuches());
+                        stmtUpdate.setBoolean(6, reserva.getAlzadores());
+                        stmtUpdate.setDouble(7, reserva.getPrecio());
+
 
                         
 
                         stmtUpdate.executeUpdate();
                     } else {
                         // NO EXISTE -> proceder a insertar
-                        stmtInsert.setString(1, cliente.getNombre());
-                        stmtInsert.setString(2, cliente.getApellido());
-                        stmtInsert.setInt(3, cliente.getEdad());
-                        stmtInsert.setString(4, cliente.getCorreoelectronico());
-                        stmtInsert.setString(5, cliente.getContraseña());
-                        stmtInsert.setList(5, cliente.getReservas());
-
+                    	stmtUpdate.setString(1, reserva.getPelicula());
+                        stmtUpdate.setString(2, reserva.getHorario());
+                        stmtUpdate.setString(3, reserva.getPalommitas());
+                        stmtUpdate.setString(4, reserva.getBebidas());
+                        stmtUpdate.setBoolean(5, reserva.getChuches());
+                        stmtUpdate.setBoolean(6, reserva.getAlzadores());
+                        stmtUpdate.setDouble(7, reserva.getPrecio());
 
                         stmtInsert.executeUpdate();
                     }
@@ -152,7 +153,7 @@ public class BDReserva {
                     }
                 }
 
-                String sqlDelete = String.format(eliminarClientesObsoletas, placeholders);
+                String sqlDelete = String.format(eliminarReservaObsoletas, placeholders);
                 stmtDelete = conn.prepareStatement(sqlDelete);
 
                 int index = 1;
@@ -162,7 +163,7 @@ public class BDReserva {
 
                 stmtDelete.executeUpdate();
             } else {
-                String sqlDeleteAll = "DELETE FROM clientes";
+                String sqlDeleteAll = "DELETE FROM reservas";
                 stmtDelete = conn.prepareStatement(sqlDeleteAll);
                 stmtDelete.executeUpdate();
             }
