@@ -24,9 +24,9 @@ public class VentanaComprarEntradas extends JFrame{
 	public JButton volveratras; 
 	
 	
-	public VentanaComprarEntradas(Cliente cliente) {
+	public VentanaComprarEntradas() {
 		
-		this.cliente = cliente; 
+		
 	    //Inicializar la lista de peliculas
 	    inicializarPeliculas();
 	    //Paneles
@@ -183,11 +183,6 @@ public class VentanaComprarEntradas extends JFrame{
 		botonSeleccionar.addActionListener(e -> {
 			VentanaSeleccionHorario ventanahorario = new VentanaSeleccionHorario(pelicula.getTitulo());
 			ventanahorario.setVisible(true);
-			//TODO 
-			//en vez de añadir una reserva a mano hay que hacer 
-			//que sea dependiendo de lo escogido y usuario
-            Reserva reserva = new Reserva("pelicula","16.00",null,"1 palomitas","1 bebida",true,false,15.0);
-            cliente.agregarReserva(reserva);
 			this.dispose();
 		});
 
@@ -206,9 +201,8 @@ public class VentanaComprarEntradas extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		//TODO 
-		Cliente cliente = new Cliente("Nombre","30","email@ejemplo.com" ,"contraseña",null);
-		VentanaComprarEntradas ventana = new VentanaComprarEntradas(cliente);
+		
+		VentanaComprarEntradas ventana = new VentanaComprarEntradas();
 		ventana.setVisible(true);
 	}
 }

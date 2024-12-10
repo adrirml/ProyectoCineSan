@@ -30,7 +30,7 @@ public class VentanaExtras extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private Cliente cliente; 
+	
 	
 	@SuppressWarnings("unlikely-arg-type")
 	public VentanaExtras() {
