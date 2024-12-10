@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+
+import domain.ListaFactura;
+
 import javax.swing.JProgressBar;
 
 
@@ -65,6 +68,8 @@ public class VentanaCargar extends JFrame{
 						break;
 					}
                 }
+                
+               ListaFactura.mostrarFacturas();
                 
                 SwingUtilities.invokeLater(()->{
                 	JOptionPane.showMessageDialog(VentanaCargar.this, "Pago realizado con éxito", "Pago finalizado", JOptionPane.INFORMATION_MESSAGE);

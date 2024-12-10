@@ -42,15 +42,16 @@ public class VentanaInicioSesion extends JFrame {
 			this.dispose(); //se cierra esta ventana
 		});
         loginButton.addActionListener(e -> {
-        	mostrarMensaje();
+        	if (mostrarMensaje()) {
         	//TODO verificar los datos en la base de datos 
         	
         	//si son validas cargar los datos 
         
-        	Cliente cliente = new Cliente(usuario.getText(),"",0,"",String.valueOf(contra.getPassword()),null);
+        	Cliente cliente = new Cliente(usuario.getText(),"0","",String.valueOf(contra.getPassword()),null);
         	VentanaCarrito carrito = new VentanaCarrito(cliente);
         	carrito.setVisible(true);
         	this.dispose();
+        	}
         
         });
      
@@ -82,11 +83,14 @@ public class VentanaInicioSesion extends JFrame {
     }
     
     
-    private void mostrarMensaje() {
+    private boolean mostrarMensaje() {
 		 
    	   String usuarios = usuario.getText();
    	   if(usuario.getText().isEmpty()) {
    		   usuarios = "Por favor introduzca su usuario";
+   	   	   String mensaje = usuarios + "\n" ;
+   	   	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
+   		   return false;
    	   }
    	   
    	
@@ -94,10 +98,15 @@ public class VentanaInicioSesion extends JFrame {
    	   String contraseña = contra.getText();
    	   if(contra.getText().isEmpty()) {
    		   contraseña = "Por favor introduzca su contraseña";
+   	   	   String mensaje = usuarios + "\n" + contraseña ;
+   	   	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
+
+   		   return false;
    	   }
    	   
-   	   String mensaje = usuarios + "\n" + contraseña ;
+   	   String mensaje = usuarios + "\n"  ;
    	   JOptionPane.showMessageDialog(this, mensaje, "Compruebe sus datos", JOptionPane.INFORMATION_MESSAGE);
+   	   return true;
       }
  	 
 
