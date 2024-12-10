@@ -53,10 +53,11 @@ public class BDCliente {
                 int edad = rs.getInt("edad");
                 String correoElectronico = rs.getString("correoelectronico");
                 String contraseña = rs.getString("contraseña");
-                List<Reserva> reservas = BDReserva.obtenerReservas(nombre);
+                List<Reserva> reservas = BDReserva.obtenerReservas(nombre);  
+                
+                
 
-
-                Cliente cliente = new Cliente(nombre, apellido, edad, correoElectronico, contraseña, reservas);
+                Cliente cliente = new Cliente(nombre, edad, correoElectronico, contraseña, reservas);
                 clientes.add(cliente);
             }
 
