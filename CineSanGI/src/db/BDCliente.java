@@ -79,7 +79,8 @@ public class BDCliente {
                 e.printStackTrace();
             }
         }
-
+    
+        
         return clientes.toArray(new Cliente[0]);
     }
 
