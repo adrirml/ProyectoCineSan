@@ -7,12 +7,12 @@ public class Cliente {
 
 	private String Nombre;
 	private String Apellido;
-	private Integer Edad;
+	private String Edad;
 	private String Correoelectronico;
 	private String Contraseña;
 	private List <Reserva> reservas;
 	
-	public Cliente(String nombre, String apellido, Integer edad, String correoelectronico, String contraseña,
+	public Cliente(String nombre, String apellido, String edad, String correoelectronico, String contraseña,
 			List<Reserva> reservas) {
 		super();
 		Nombre = nombre;
@@ -23,7 +23,13 @@ public class Cliente {
 		this.reservas = new ArrayList<>();
 	}
 	
-
+	public Cliente(String nombre, String apellido, String edadnum, String correoelectronico, String contraseña) {
+		Nombre = nombre;
+		Apellido = apellido;
+		Edad = edadnum;
+		Correoelectronico = correoelectronico;
+		Contraseña = contraseña;
+	}
 	public String getNombre() {
 		return Nombre;
 	}
@@ -40,11 +46,11 @@ public class Cliente {
 		Apellido = apellido;
 	}
 
-	public Integer getEdad() {
+	public String getEdad() {
 		return Edad;
 	}
 
-	public void setEdad(Integer edad) {
+	public void setEdad(String edad) {
 		Edad = edad;
 	}
 

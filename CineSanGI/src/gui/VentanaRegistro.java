@@ -194,13 +194,13 @@ public class VentanaRegistro extends JFrame {
 		 
 		 String nombre = nombreClte.getText();
 		 String apellido = "";
-		 Integer edadnum = Integer.parseInt(edad); 
+		 String edadnum = edad; 
 		 String correo = correoClte.getText();
 		 String password = new String(contrasenya.getPassword());
 		 
 		 
 		 //crear cliente
-		 Cliente cliente = new Cliente(nombre,apellido,edadnum,correo,password,null);
+		 Cliente cliente = new Cliente(nombre,apellido,edadnum,correo,password);
 		 
 		 //TODO aqui abria que guardarlo en la base de datos 
 		 
