@@ -72,6 +72,7 @@ public class VentanaComprarEntradas extends JFrame{
 		//Accion de cerrar la ventana al volver atras 
 		
 		
+		
 	  	//Confi Layout
 		setTitle("Compra de Entradas");
 	    setSize(600, 800);
