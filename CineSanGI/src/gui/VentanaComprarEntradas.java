@@ -126,15 +126,23 @@ public class VentanaComprarEntradas extends JFrame{
 	
 	
 	private Pelicula buscarPelicula(ArrayList<Pelicula> peliculas, String titulo, int año, int edad_min, int index) {
-		if (index >= peliculas.size()){
-			return null;
-		}
+		if (index >= peliculas.size()) {
+	        return null; // Caso base: no encontrada
+	    }
+
 		Pelicula peliculaActual = peliculas.get(index);
 		
 		
-		if (peliculaActual.getTitulo().equalsIgnoreCase(titulo) && (año <= 0 || peliculaActual.getAnyoEstreno() == año) && (edad_min <= 0 || peliculaActual.getEdadRecomendada() <= edad_min)) {
+		boolean cTitulo = peliculaActual.getTitulo().equalsIgnoreCase(titulo);
+		boolean cAño	= (año <= 0 || peliculaActual.getAnyoEstreno() >= año);
+		boolean cEdad = (edad_min <= 0 || peliculaActual.getEdadRecomendada() >= edad_min);
+		int coincide = 0;
+		if (cTitulo) coincide++;
+		if (cAño) coincide++;
+		if (cEdad) coincide++;
+		if (coincide == 1) {
 			return peliculaActual;
-		}
+		}	        
 		return buscarPelicula(peliculas,titulo,año,edad_min, index +1);
 	}	
 	//Array de Películas
