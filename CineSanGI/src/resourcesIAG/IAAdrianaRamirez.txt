@@ -1,0 +1,44 @@
+“RESOURCES/IAG”: 
+Conversaciones de chat GPT. 
+1. Método recursivo cine: 
+“Ponme un ejemplo de un método recursivo que puedo aplicar a un proyecto de programación sobre un cine por favor”
+Respuesta:
+Un método recursivo que podrías aplicar en un proyecto de programación sobre un cine podría ser la búsqueda de asientos disponibles en una sala organizada como una matriz o lista de listas. Supongamos que cada asiento en la sala se representa por un valor en una matriz, donde:
+* 0 indica un asiento disponible.
+* 1 indica un asiento ocupado.
+Si quieres encontrar una fila con asientos consecutivos disponibles, puedes usar un método recursivo para recorrer la sala.
+2. Barra de progreso:
+“Tengo una ventana con una barra de progreso, quiero que la barra esté en la mitad, que no ocupe toda la ventana”
+Repuesta:
+Para que la barra de progreso sea más estrecha y ocupe menos espacio vertical en la ventana, utilizaremos márgenes adicionales y un diseño adecuado con EmptyBorder.
+3. If:
+“¿Si pongo un if con varias condiciones separadas por ||, se comprueba en el caso en el que uno sea false y en caso de que varios sean false?”
+Repuesta:
+Cuando utilizas un operador lógico || (OR) en un if, el comportamiento es el siguiente:
+1. Cortocircuito del OR (||):
+o En cuanto se encuentra una condición verdadera en la secuencia, el resto de las condiciones no se evalúan.
+o Si todas las condiciones son falsas, entonces el resultado del if es false.
+2. Evaluación paso a paso:
+o Se comprueban las condiciones de izquierda a derecha.
+o Si una condición es true, se detiene la evaluación y se ejecuta el bloque asociado al if.
+4. ComboBox:
+“tengo un comboBox, quiero poner un if por si no se ha seleccionado ninguna”
+Respuesta:
+Para verificar si no se ha seleccionado ninguna opción en un JComboBox, puedes comprobar si la selección actual es null o si corresponde a un valor que consideres como "vacío" o no válido (por ejemplo, un mensaje predeterminado como "Selecciona una opción").
+5. Obtener fecha en JAVA:
+“cómo puedo conseguir la fecha en ese momento en java?”
+Respuesta:
+En Java, puedes obtener la fecha actual usando la clase LocalDate, LocalDateTime o Date dependiendo de tus necesidades y la versión de Java que estés utilizando. Aquí te dejo algunos ejemplos:
+Usando LocalDate y LocalDateTime (Java 8 y versiones posteriores):
+Estas clases son parte de la API de tiempo moderno introducida en Java 8.
+Obtener solo la fecha actual:
+import java.time.LocalDate;
+public class Main {
+    public static void main(String[] args) {
+        LocalDate fechaActual = LocalDate.now();
+        System.out.println("Fecha actual: " + fechaActual);
+    }
+}
+
+
+
