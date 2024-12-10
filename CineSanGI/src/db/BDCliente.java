@@ -50,7 +50,7 @@ public class BDCliente {
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                int edad = rs.getInt("edad");
+                String edad = rs.getString("edad");
                 String correoElectronico = rs.getString("correoelectronico");
                 String contraseña = rs.getString("contraseña");
                 
@@ -62,7 +62,7 @@ public class BDCliente {
                     }                
                 
 
-                Cliente cliente = new Cliente(nombre, apellido, edad, correoElectronico, contraseña, reservas);
+                Cliente cliente = new Cliente(nombre, edad, correoElectronico, contraseña, reservas);
                 clientes.add(cliente);
                 }
             }
@@ -126,12 +126,11 @@ public class BDCliente {
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {
                         // EXISTE -> proceder a actualizar
-                        stmtUpdate.setString(1, cliente.getNombre());
-                        stmtUpdate.setString(2, cliente.getApellido());
-                        stmtUpdate.setInt(3, cliente.getEdad());
-                        stmtUpdate.setString(4, cliente.getCorreoelectronico());
-                        stmtUpdate.setString(5, cliente.getContraseña());
-                        stmtUpdate.executeUpdate();
+                    	stmtInsert.setString(1, cliente.getNombre());
+                        stmtInsert.setString(2, cliente.getEdad());
+                        stmtInsert.setString(3, cliente.getCorreoelectronico());
+                        stmtInsert.setString(4, cliente.getContraseña());
+                        stmtInsert.executeUpdate();
 
                         // Eliminar reservas existentes del cliente
                         stmtDelete.setString(1, cliente.getNombre());
@@ -142,10 +141,9 @@ public class BDCliente {
                     } else {
                         // NO EXISTE -> proceder a insertar
                         stmtInsert.setString(1, cliente.getNombre());
-                        stmtInsert.setString(2, cliente.getApellido());
-                        stmtInsert.setInt(3, cliente.getEdad());
-                        stmtInsert.setString(4, cliente.getCorreoelectronico());
-                        stmtInsert.setString(5, cliente.getContraseña());
+                        stmtInsert.setString(2, cliente.getEdad());
+                        stmtInsert.setString(3, cliente.getCorreoelectronico());
+                        stmtInsert.setString(4, cliente.getContraseña());
                         stmtInsert.executeUpdate();
 
 
