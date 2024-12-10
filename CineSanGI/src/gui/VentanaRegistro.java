@@ -139,8 +139,7 @@ public class VentanaRegistro extends JFrame {
 		siguiente.addActionListener(e -> { 
 		mostrarMensaje();
 		registrarCliente();
-		VentanaPrincipal ventana = new VentanaPrincipal();
-		ventana.setVisible(true);
+		
 		this.dispose();
 		
 		});
@@ -202,9 +201,8 @@ public class VentanaRegistro extends JFrame {
 		 //crear cliente
 		 Cliente cliente = new Cliente(nombre,edadnum,correo,password);
 		 
-		 //TODO aqui abria que guardarlo en la base de datos 
 		 
-		 VentanaComprarEntradas ventanacompra = new VentanaComprarEntradas(cliente);
+		 VentanaComprarEntradas ventanacompra = new VentanaComprarEntradas();
 		 ventanacompra.setVisible(true);
 		 this.dispose();
 	 }

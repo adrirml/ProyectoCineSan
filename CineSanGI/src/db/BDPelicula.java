@@ -31,7 +31,7 @@ public class BDPelicula {
 
         try {
             // Establecer la conexión
-            String url = "CineSan";
+            String url = "jdbc:mysql://localhost:3306/CineSan";
             String user = "CineSan";
             String password = "Contraseña";
 
@@ -74,9 +74,10 @@ public class BDPelicula {
     }
 
     public void guardarTodasLasPeliculas(Pelicula[] peliculas) {
-        String url = "";
-        String user = "";
-        String password = "";
+    	String url = "jdbc:mysql://localhost:3306/CineSan";
+        String user = "CineSan";
+        String password = "Contraseña";
+
 
         String comprobarSiPeliculaYaExiste = "SELECT 1 FROM peliculas WHERE titulo = ?";
         String actualizarPelicula = "UPDATE peliculas SET director = ?, anyoEstreno = ?, edadRecomendada = ?, logoPath = ? WHERE titulo = ?";
@@ -100,7 +101,6 @@ public class BDPelicula {
             stmtUpdate = conn.prepareStatement(actualizarPelicula);
             stmtInsert = conn.prepareStatement(agregarNuevaPelicula);
 
-            // Conjunto para almacenar todos los IDs proporcionados
             Set<String> titulosDados = new HashSet<>();
 
             for (Pelicula pelicula : peliculas) {

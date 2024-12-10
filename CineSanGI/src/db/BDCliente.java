@@ -1,4 +1,4 @@
-package clases;
+package db;
 
 import java.sql.Statement;
 import java.sql.Connection;
@@ -32,13 +32,12 @@ public class BDCliente {
 
         try {
             // Establecer la conexión
-            String url = "";
-            String user = "";
-            String password = "";
+        	String url = "jdbc:mysql://localhost:3306/CineSan";
+            String user = "CineSan";
+            String password = "Contraseña";
 
             conn = DriverManager.getConnection(url, user, password);
             
-
             // Crear una declaración
             stmt = conn.createStatement();
 
@@ -50,15 +49,21 @@ public class BDCliente {
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                int edad = rs.getInt("edad");
+                String edad = rs.getString("edad");
                 String correoElectronico = rs.getString("correoelectronico");
                 String contraseña = rs.getString("contraseña");
-                List<Reserva> reservas = BDReserva.obtenerReservas(nombre);  
                 
+                Reserva[] reservasArray = BDReserva.obtenerReservas(nombre); 
+                List<Reserva> reservas = new ArrayList<>();
+                if (reservasArray != null) {
+                    for (Reserva reserva : reservasArray) {
+                        reservas.add(reserva);
+                    }                
                 
 
                 Cliente cliente = new Cliente(nombre, edad, correoElectronico, contraseña, reservas);
                 clientes.add(cliente);
+                }
             }
 
         } catch (SQLException e) {
@@ -73,19 +78,22 @@ public class BDCliente {
                 e.printStackTrace();
             }
         }
-
+    
+        
         return clientes.toArray(new Cliente[0]);
     }
 
     public void guardarTodosLosClientes(Cliente[] clientes) {
-        String url = "";
-        String user = "";
-        String password = "";
+    	String url = "jdbc:mysql://localhost:3306/CineSan";
+        String user = "CineSan";
+        String password = "Contraseña";
 
         String comprobarSiClienteYaExiste = "SELECT 1 FROM clientes WHERE nombre = ?";
         String actualizarCliente = "UPDATE clientes SET apellido = ?, edad = ?, correoelectronico = ?, contraseña = ? WHERE nombre = ?";
         String agregarNuevaCliente = "INSERT INTO clientes (nombre, apellido , edad, correoelectronico, contraseña) VALUES (?, ?, ?, ?, ?)";
         String eliminarClientesObsoletas = "DELETE FROM clientes WHERE nombre NOT IN (%s)";
+        String insertarReserva = "INSERT INTO reservas (pelicula, detalles) VALUES (?, ?)";
+        String eliminarReservasCliente = "DELETE FROM reservas WHERE pelicula = ?";
 
         Connection conn = null;
         PreparedStatement stmtCheck = null;
@@ -103,39 +111,52 @@ public class BDCliente {
             stmtCheck = conn.prepareStatement(comprobarSiClienteYaExiste);
             stmtUpdate = conn.prepareStatement(actualizarCliente);
             stmtInsert = conn.prepareStatement(agregarNuevaCliente);
+            stmtDelete = conn.prepareStatement(eliminarReservasCliente);
 
-            // Conjunto para almacenar todos los IDs proporcionados
+
             Set<String> nombresdados = new HashSet<>();
 
             for (Cliente cliente: clientes) {
             	nombresdados.add(cliente.getNombre());
 
-                // Verificar si la película ya existe
+                // Verificar si el cliente ya existe
                 stmtCheck.setString(1, cliente.getNombre());
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {
                         // EXISTE -> proceder a actualizar
-                        stmtUpdate.setString(1, cliente.getNombre());
-                        stmtUpdate.setString(2, cliente.getApellido());
-                        stmtUpdate.setInt(3, cliente.getEdad());
-                        stmtUpdate.setString(4, cliente.getCorreoelectronico());
-                        stmtUpdate.setString(5, cliente.getContraseña());
-                        stmtUpdate.setArray(6, cliente.getReservas().toArray());
+                    	stmtInsert.setString(1, cliente.getNombre());
+                        stmtInsert.setString(2, cliente.getEdad());
+                        stmtInsert.setString(3, cliente.getCorreoelectronico());
+                        stmtInsert.setString(4, cliente.getContraseña());
+                        stmtInsert.executeUpdate();
 
+                        // Eliminar reservas existentes del cliente
+                        stmtDelete.setString(1, cliente.getNombre());
+                        stmtDelete.executeUpdate();
                         
 
                         stmtUpdate.executeUpdate();
                     } else {
                         // NO EXISTE -> proceder a insertar
                         stmtInsert.setString(1, cliente.getNombre());
-                        stmtInsert.setString(2, cliente.getApellido());
-                        stmtInsert.setInt(3, cliente.getEdad());
-                        stmtInsert.setString(4, cliente.getCorreoelectronico());
-                        stmtInsert.setString(5, cliente.getContraseña());
-                        stmtInsert.setList(5, cliente.getReservas());
-
-
+                        stmtInsert.setString(2, cliente.getEdad());
+                        stmtInsert.setString(3, cliente.getCorreoelectronico());
+                        stmtInsert.setString(4, cliente.getContraseña());
                         stmtInsert.executeUpdate();
+
+
+                    }
+                    // Insertar reservas del cliente
+                    for (Reserva reserva : cliente.getReservas()) {
+                    	stmtInsert.setString(1, cliente.getNombre()); 
+                    	stmtInsert.setString(2, reserva.getHorario()); 
+                    	stmtInsert.setString(3, reserva.getPalommitas()); 
+                    	stmtInsert.setString(4, reserva.getBebidas()); 
+                    	stmtInsert.setBoolean(5, reserva.getChuches()); 
+                    	stmtInsert.setBoolean(6, reserva.getAlzadores()); 
+                    	stmtInsert.setDouble(7, reserva.getPrecio()); 
+
+                    	stmtInsert.executeUpdate();
                     }
                 }
             }

@@ -1,0 +1,22 @@
+Conversacion con ChatGpt
+
+
+1.prompt: "Como hago para que la imagen me salga en la parte de arriba de la ventana y en pequeño 
+si utilizando paneles no consigo ponerlo como me quiero" 
+
+-Para mostrar una imagen en la parte superior de una ventana en Java,
+ puedes usar un JLabelcon ,un ImageIcon y colocarlo JPanel con BorderLayout y cambiar el 
+ tamaño de la imagen utilizando getScaledInstance y poner las dimensiones a tu gusto 
+ 
+ 2.prompt: como consigo que todos los asientos me aparezcan con el mismo tamaño y en un recuadro 
+ como en una calculadora los botones
+ 
+ -deberas crear tantos botones como asientos quieras.Cuando dichos botones esten creados, añadelos 
+ a un panel con un gridlayout de las dimensiones que se ajusten a tus necesidades y finalmente añade
+ dicho panel a la ventana.
+ 
+ 3. prompt: Como cambio la letra de este texto: CineSan para que salga mas bonito y mas estetico 
+ 
+ - utiliza: labelTitulo.setFont(new Font("Tahoma", Font.BOLD, 30)); 
+ 
+ 
