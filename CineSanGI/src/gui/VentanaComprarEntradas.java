@@ -74,7 +74,7 @@ public class VentanaComprarEntradas extends JFrame{
 		
 	  	//Confi Layout
 		setTitle("Compra de Entradas");
-	    setSize(600, 700);
+	    setSize(600, 800);
 	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 	    setLayout(new BorderLayout());
 	    panelTitulo.add(labelPelis);
