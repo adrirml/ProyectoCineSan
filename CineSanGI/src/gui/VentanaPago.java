@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -21,8 +22,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import domain.Cliente;
+import domain.Factura;
+import domain.ListaFactura;
 
 public class VentanaPago extends JFrame {
+	
+	
 	
 	private JPanel panelDatos;
 	private JPanel panel1;
@@ -151,6 +156,10 @@ public class VentanaPago extends JFrame {
 						JOptionPane.showMessageDialog(this, "Es necesario que rellene todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
 						
 					}else {
+						
+						//añadimos la factura a la lista:
+						ListaFactura.agregarFactura(txtNombre.getText());
+						
 						VentanaCargar ventanaCargar = new VentanaCargar();
 						ventanaCargar.setVisible(true);
 						
