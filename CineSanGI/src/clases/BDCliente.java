@@ -1,4 +1,4 @@
-package db;
+package clases;
 
 import java.sql.Statement;
 import java.sql.Connection;
@@ -11,29 +11,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import domain.Pelicula;
+import domain.Cliente;
+import domain.Reserva;
 
-public class BDPelicula {
-    private static BDPelicula instance;
+public class BDCliente {
+	private static BDCliente instance;
 
-    private BDPelicula() { }
+    private BDCliente() { }
 
-    public static synchronized BDPelicula get() {
-        if (instance == null) instance = new BDPelicula();
+    public static synchronized BDCliente get() {
+        if (instance == null) instance = new BDCliente();
         return instance;
     }
 
-    public Pelicula[] obtenerTodasLasPeliculas() {
-        List<Pelicula> peliculas = new ArrayList<>();
+    public Cliente[] obtenerTodasLosClientes() {
+        List<Cliente> clientes = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
 
         try {
             // Establecer la conexión
-            String url = "CineSan";
-            String user = "CineSan";
-            String password = "Contraseña";
+            String url = "";
+            String user = "";
+            String password = "";
 
             conn = DriverManager.getConnection(url, user, password);
             
@@ -42,19 +43,21 @@ public class BDPelicula {
             stmt = conn.createStatement();
 
             // Ejecutar la consulta
-            String sql = "SELECT * FROM peliculas";
+            String sql = "SELECT * FROM clientes";
             rs = stmt.executeQuery(sql);
 
             // Procesar el ResultSet
             while (rs.next()) {
-                String titulo = rs.getString("titulo");
-                String director = rs.getString("director");
-                int anyoEstreno = rs.getInt("anyoEstreno");
-                int edadRecomendada = rs.getInt("edadRecomendada");
-                String logoPath = rs.getString("logoPath");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                int edad = rs.getInt("edad");
+                String correoElectronico = rs.getString("correoelectronico");
+                String contraseña = rs.getString("contraseña");
+                List<Reserva> reservas = BDReserva.obtenerReservas(nombre);
 
-                Pelicula pelicula = new Pelicula(titulo, director, anyoEstreno, edadRecomendada, logoPath);
-                peliculas.add(pelicula);
+
+                Cliente cliente = new Cliente(nombre, apellido, edad, correoElectronico, contraseña, reservas);
+                clientes.add(cliente);
             }
 
         } catch (SQLException e) {
@@ -63,25 +66,25 @@ public class BDPelicula {
             // Cerrar recursos
             try {
                 if (rs != null) rs.close();
-//                if (stmt != null) stmt.close();
+                if (stmt != null) stmt.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
 
-        return peliculas.toArray(new Pelicula[0]);
+        return clientes.toArray(new Cliente[0]);
     }
 
-    public void guardarTodasLasPeliculas(Pelicula[] peliculas) {
+    public void guardarTodosLosClientes(Cliente[] clientes) {
         String url = "";
         String user = "";
         String password = "";
 
-        String comprobarSiPeliculaYaExiste = "SELECT 1 FROM peliculas WHERE titulo = ?";
-        String actualizarPelicula = "UPDATE peliculas SET director = ?, anyoEstreno = ?, edadRecomendada = ?, logoPath = ? WHERE titulo = ?";
-        String agregarNuevaPelicula = "INSERT INTO peliculas (titulo, director, anyoEstreno, edadRecomendada, logoPath) VALUES (?, ?, ?, ?, ?)";
-        String eliminarPeliculasObsoletas = "DELETE FROM peliculas WHERE id NOT IN (%s)";
+        String comprobarSiClienteYaExiste = "SELECT 1 FROM clientes WHERE nombre = ?";
+        String actualizarCliente = "UPDATE clientes SET apellido = ?, edad = ?, correoelectronico = ?, contraseña = ? WHERE nombre = ?";
+        String agregarNuevaCliente = "INSERT INTO clientes (nombre, apellido , edad, correoelectronico, contraseña) VALUES (?, ?, ?, ?, ?)";
+        String eliminarClientesObsoletas = "DELETE FROM clientes WHERE nombre NOT IN (%s)";
 
         Connection conn = null;
         PreparedStatement stmtCheck = null;
@@ -96,62 +99,66 @@ public class BDPelicula {
             conn.setAutoCommit(false);
 
             // Preparar las sentencias
-            stmtCheck = conn.prepareStatement(comprobarSiPeliculaYaExiste);
-            stmtUpdate = conn.prepareStatement(actualizarPelicula);
-            stmtInsert = conn.prepareStatement(agregarNuevaPelicula);
+            stmtCheck = conn.prepareStatement(comprobarSiClienteYaExiste);
+            stmtUpdate = conn.prepareStatement(actualizarCliente);
+            stmtInsert = conn.prepareStatement(agregarNuevaCliente);
 
             // Conjunto para almacenar todos los IDs proporcionados
-            Set<String> titulosDados = new HashSet<>();
+            Set<String> nombresdados = new HashSet<>();
 
-            for (Pelicula pelicula : peliculas) {
-            	titulosDados.add(pelicula.getTitulo());
+            for (Cliente cliente: clientes) {
+            	nombresdados.add(cliente.getNombre());
 
                 // Verificar si la película ya existe
-                stmtCheck.setString(1, pelicula.getTitulo());
+                stmtCheck.setString(1, cliente.getNombre());
                 try (ResultSet rs = stmtCheck.executeQuery()) {
                     if (rs.next()) {
                         // EXISTE -> proceder a actualizar
-                        stmtUpdate.setString(1, pelicula.getTitulo());
-                        stmtUpdate.setString(2, pelicula.getDirector());
-                        stmtUpdate.setInt(3, pelicula.getAnyoEstreno());
-                        stmtUpdate.setInt(4, pelicula.getEdadRecomendada());
-                        stmtUpdate.setString(5, pelicula.getLogoPath());
+                        stmtUpdate.setString(1, cliente.getNombre());
+                        stmtUpdate.setString(2, cliente.getApellido());
+                        stmtUpdate.setInt(3, cliente.getEdad());
+                        stmtUpdate.setString(4, cliente.getCorreoelectronico());
+                        stmtUpdate.setString(5, cliente.getContraseña());
+                        stmtUpdate.setArray(6, cliente.getReservas().toArray());
+
+                        
 
                         stmtUpdate.executeUpdate();
                     } else {
                         // NO EXISTE -> proceder a insertar
-                        stmtInsert.setString(1, pelicula.getTitulo());
-                        stmtInsert.setString(2, pelicula.getDirector());
-                        stmtInsert.setInt(3, pelicula.getAnyoEstreno());
-                        stmtInsert.setInt(4, pelicula.getEdadRecomendada());
-                        stmtInsert.setString(5, pelicula.getLogoPath());
+                        stmtInsert.setString(1, cliente.getNombre());
+                        stmtInsert.setString(2, cliente.getApellido());
+                        stmtInsert.setInt(3, cliente.getEdad());
+                        stmtInsert.setString(4, cliente.getCorreoelectronico());
+                        stmtInsert.setString(5, cliente.getContraseña());
+                        stmtInsert.setList(5, cliente.getReservas());
+
 
                         stmtInsert.executeUpdate();
                     }
                 }
             }
 
-            if (!titulosDados.isEmpty()) {
+            if (!nombresdados.isEmpty()) {
                 StringBuilder placeholders = new StringBuilder();
-                for (int i = 0; i < titulosDados.size(); i++) {
+                for (int i = 0; i < nombresdados.size(); i++) {
                     placeholders.append("?");
-                    if (i < titulosDados.size() - 1) {
+                    if (i < nombresdados.size() - 1) {
                         placeholders.append(", ");
                     }
                 }
 
-                String sqlDelete = String.format(eliminarPeliculasObsoletas, placeholders);
+                String sqlDelete = String.format(eliminarClientesObsoletas, placeholders);
                 stmtDelete = conn.prepareStatement(sqlDelete);
 
                 int index = 1;
-                for (String titulo : titulosDados) {
+                for (String titulo : nombresdados) {
                     stmtDelete.setString(index++, titulo);
                 }
 
                 stmtDelete.executeUpdate();
             } else {
-                // Si no hay Titulos proporcionados, eliminar todas las películas
-                String sqlDeleteAll = "DELETE FROM peliculas";
+                String sqlDeleteAll = "DELETE FROM clientes";
                 stmtDelete = conn.prepareStatement(sqlDeleteAll);
                 stmtDelete.executeUpdate();
             }
